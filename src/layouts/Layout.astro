@@ -9,7 +9,6 @@ interface Props {
 
 const { title, description } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const todayDate = new Date().toISOString().split('T')[0];
 ---
 
 <!DOCTYPE html>
@@ -21,25 +20,25 @@ const todayDate = new Date().toISOString().split('T')[0];
   <title>{title}</title>
   <meta name="description" content={description} />
   
-  <!-- Preconnect to API Worker and Google Fonts to improve LCP -->
+  <!-- Preconnect to API Worker -->
   <link rel="preconnect" href="https://saudi-gold-api.2019ag138.workers.dev" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-  <!-- Non-blocking Font Loading to fix render-blocking resources -->
+  <!-- Optimized Google Fonts: Weights 500 & 700 only -->
   <link 
     rel="preload" 
     as="style" 
-    href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" 
+    href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700&display=swap" 
   />
   <link 
     rel="stylesheet" 
-    href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" 
+    href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700&display=swap" 
     media="print" 
     onload="this.media='all'" 
   />
   <noscript>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700&display=swap" />
   </noscript>
 
   <!-- Open Graph -->
@@ -50,19 +49,39 @@ const todayDate = new Date().toISOString().split('T')[0];
   <meta property="og:url" content={canonicalURL} />
   <meta property="og:site_name" content="أسعار الذهب مباشر بالسعودية" />
 
-  <!-- Google Analytics 4 (Deferred to minimize main-thread work) -->
-  <script is:inline defer src="https://www.googletagmanager.com/gtag/js?id=G-0YPCJE6C6D"></script>
+  <!-- Smart Non-Blocking Loader for GA4 & AdSense -->
   <script is:inline>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-0YPCJE6C6D');
+
+    function loadThirdPartyScripts() {
+      if (window.scriptsLoaded) return;
+      window.scriptsLoaded = true;
+
+      // 1. Load Google Analytics 4
+      const gaScript = document.createElement('script');
+      gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-0YPCJE6C6D';
+      gaScript.async = true;
+      document.head.appendChild(gaScript);
+
+      // 2. Load Google AdSense
+      const adsScript = document.createElement('script');
+      adsScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7795085851692471';
+      adsScript.async = true;
+      adsScript.crossOrigin = 'anonymous';
+      document.head.appendChild(adsScript);
+    }
+
+    // Trigger on first human interaction or after 3.5s idle window
+    ['touchstart', 'scroll', 'mousemove', 'keydown'].forEach(event => {
+      window.addEventListener(event, loadThirdPartyScripts, { once: true, passive: true });
+    });
+    setTimeout(loadThirdPartyScripts, 3500);
   </script>
 
-  <!-- Google AdSense (Deferred execution to prevent render blocking) -->
-  <script is:inline defer src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7795085851692471" crossorigin="anonymous"></script>
-
-  <!-- AEO & Structured Data (Breadcrumbs, Pricing, FAQ) -->
+  <!-- Structured Data -->
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@graph": [
@@ -90,40 +109,15 @@ const todayDate = new Date().toISOString().split('T')[0];
         "feesAndCommissionsSpecification": "شامل الضريبة وبدون مصنعية",
         "category": "Precious Metals",
         "currency": "SAR"
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "كم سعر بيع وشراء الذهب عيار 21 اليوم في السعودية؟",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "يتم تسعير جرام الذهب عيار 21 اليوم في السعودية بدون مصنعية بسعر الشراء من المحلات وسعر البيع للأفراد وفقاً لتحديثات البورصة العالمية اللحظية بالريال السعودي."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "كم تبلغ قيمة مصنعية الذهب في محلات السعودية؟",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "تتراوح مصنعية الذهب في السعودية بين 15 إلى 50 ريال للجرام حسب التصميم، وتبلغ ضريبة القيمة المضافة 15% على المصنعية فقط في المشغولات والسبائك الاستثمارية المعفاة."
-            }
-          }
-        ]
       }
     ]
   })} />
 </head>
 <body class="bg-gray-50 text-gray-900 font-arabic antialiased min-h-screen flex flex-col">
-  
   <SiteHeader />
-  
   <div class="flex-grow">
     <slot />
   </div>
-
   <SiteFooter />
-  
 </body>
 </html>
