@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import GoldCalculator from '../components/GoldCalculator.astro';
 
 const lastUpdated = new Date().toLocaleTimeString('ar-SA', { 
   hour: '2-digit', 
@@ -7,13 +8,13 @@ const lastUpdated = new Date().toLocaleTimeString('ar-SA', {
   timeZone: 'Asia/Riyadh' 
 });
 
+// Fallback static data while client-side fetches live rates
 const rates = [
   { carat: 'عيار 24 (ذهب خالص 99.9%)', buySAR: '315.50', sellSAR: '312.20', usd: '$84.13' },
   { carat: 'عيار 22 (تداول الخليج)', buySAR: '289.20', sellSAR: '286.00', usd: '$77.12' },
   { carat: 'عيار 21 (الأكثر تداولاً)', buySAR: '276.10', sellSAR: '273.20', usd: '$73.62' },
   { carat: 'عيار 18 (مشغولات عصرية)', buySAR: '236.60', sellSAR: '234.10', usd: '$63.09' },
   { carat: 'عيار 14', buySAR: '184.00', sellSAR: '181.50', usd: '$49.06' },
-  { carat: 'أوقية / أونصة الذهب (31.1 جرام)', buySAR: '9,812.05', sellSAR: '9,709.42', usd: '$2,616.50' }
 ];
 
 const bullions = [
@@ -53,6 +54,12 @@ const bullions = [
         جدول التسعير المباشر لأسعار الذهب بالريال السعودي والدولار الأمريكي، محدث لحظياً لأسواق الذهب في الرياض، جدة، والدمام. تشمل البيانات سعر الذهب الخام، وسعر البيع للأفراد، وسعر الشراء بالمصنعية والضريبة.
       </p>
     </header>
+
+    <!-- AdSense Top Banner Placeholder (Prevents Cumulative Layout Shift) -->
+    <div class="w-full min-h-[90px] bg-gray-50 flex items-center justify-center mb-8 border border-gray-100 rounded-lg text-gray-400 text-xs text-center" aria-hidden="true">
+      <!-- Google AdSense Code will inject here -->
+      [مساحة إعلانية]
+    </div>
 
     <!-- Main Live Rates Table -->
     <section class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-10">
@@ -102,7 +109,7 @@ const bullions = [
               <th class="py-3 px-4">موقف ضريبة القيمة المضافة (VAT)</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-gray-200 text-sm">
+          <tbody id="bullion-table-body" class="divide-y divide-gray-200 text-sm">
             {bullions.map((b) => (
               <tr class="hover:bg-amber-50/40 transition-colors">
                 <td class="py-3.5 px-4 font-bold text-gray-900">{b.item}</td>
@@ -114,6 +121,15 @@ const bullions = [
         </table>
       </div>
     </section>
+
+    <!-- Interactive Gold Calculator Component -->
+    <GoldCalculator />
+
+    <!-- AdSense Middle Content Placeholder -->
+    <div class="w-full min-h-[250px] bg-gray-50 flex items-center justify-center mb-10 border border-gray-100 rounded-lg text-gray-400 text-xs text-center" aria-hidden="true">
+      <!-- Google AdSense Square/Responsive Code will inject here -->
+      [مساحة إعلانية]
+    </div>
 
     <!-- Educational & AEO Content Block -->
     <section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
@@ -152,36 +168,67 @@ const bullions = [
       </div>
     </section>
   </main>
+  
   <script>
   async function fetchLiveRates() {
     try {
-      // Replace with your actual Cloudflare Worker URL
       const response = await fetch('https://saudi-gold-api.2019ag138.workers.dev');
       const data = await response.json();
       
-      // Update the timestamp on the page
+      // 1. Update the timestamp on the page
       const timeElements = document.querySelectorAll('.live-timestamp');
       timeElements.forEach(el => el.textContent = data.timestamp);
 
-      // Example of mapping the live data into your HTML table
-      // To make this work, give your <tbody> an id="rates-table-body" in your HTML above
+      // 2. Parse and map the live carat rates into the HTML table (Using new Object payload structure)
       const tbody = document.getElementById('rates-table-body');
-      if (tbody) {
-        tbody.innerHTML = data.rates.map(row => `
+      if (tbody && data.rates) {
+        tbody.innerHTML = Object.values(data.rates).map(row => `
           <tr class="hover:bg-amber-50/40 transition-colors">
-            <td class="py-3.5 px-4 font-bold text-gray-900">${row.carat}</td>
-            <td class="py-3.5 px-4 text-emerald-700 font-semibold">${row.buySAR} ر.س</td>
-            <td class="py-3.5 px-4 text-gray-800 font-semibold">${row.sellSAR} ر.س</td>
+            <td class="py-3.5 px-4 font-bold text-gray-900">${row.karat} (${row.purity})</td>
+            <td class="py-3.5 px-4 text-emerald-700 font-semibold">${row.gram_buy} ر.س</td>
+            <td class="py-3.5 px-4 text-gray-800 font-semibold">${row.gram_sell} ر.س</td>
             <td class="py-3.5 px-4 text-gray-500 font-mono">$${row.usd}</td>
           </tr>
-        `).join('');
+        `).join('') + `
+          <tr class="hover:bg-amber-50/40 transition-colors">
+            <td class="py-3.5 px-4 font-bold text-gray-900">أوقية / أونصة الذهب</td>
+            <td class="py-3.5 px-4 text-emerald-700 font-semibold">${data.units.ounce_sar} ر.س</td>
+            <td class="py-3.5 px-4 text-gray-800 font-semibold">-</td>
+            <td class="py-3.5 px-4 text-gray-500 font-mono">$${data.spot_usd_oz}</td>
+          </tr>
+        `;
       }
+
+      // 3. Dynamically update the Bullion & Pounds table based on base 24K and 21K rates
+      const bullionBody = document.getElementById('bullion-table-body');
+      if (bullionBody && data.rates["24K"] && data.units) {
+        const g24 = parseFloat(data.rates["24K"].gram_buy);
+        const pound = parseFloat(data.units.pound_21k_sar);
+        
+        bullionBody.innerHTML = `
+          <tr class="hover:bg-amber-50/40 transition-colors"><td class="py-3.5 px-4 font-bold text-gray-900">جنيه الذهب السعودي (8 جرام عيار 21)</td><td class="py-3.5 px-4 text-gold-700 font-bold">${pound.toFixed(2)} ر.س</td><td class="py-3.5 px-4 text-emerald-600 font-medium text-xs md:text-sm">معفى من الضريبة</td></tr>
+          <tr class="hover:bg-amber-50/40 transition-colors"><td class="py-3.5 px-4 font-bold text-gray-900">نصف جنيه ذهب (4 جرام عيار 21)</td><td class="py-3.5 px-4 text-gold-700 font-bold">${(pound / 2).toFixed(2)} ر.س</td><td class="py-3.5 px-4 text-emerald-600 font-medium text-xs md:text-sm">معفى من الضريبة</td></tr>
+          <tr class="hover:bg-amber-50/40 transition-colors"><td class="py-3.5 px-4 font-bold text-gray-900">سبيكة ذهب 1 جرام (عيار 24)</td><td class="py-3.5 px-4 text-gold-700 font-bold">${(g24 * 1).toFixed(2)} ر.س</td><td class="py-3.5 px-4 text-emerald-600 font-medium text-xs md:text-sm">معفى (نقاء 99%)</td></tr>
+          <tr class="hover:bg-amber-50/40 transition-colors"><td class="py-3.5 px-4 font-bold text-gray-900">سبيكة ذهب 5 جرام (عيار 24)</td><td class="py-3.5 px-4 text-gold-700 font-bold">${(g24 * 5).toFixed(2)} ر.س</td><td class="py-3.5 px-4 text-emerald-600 font-medium text-xs md:text-sm">معفى (نقاء 99%)</td></tr>
+          <tr class="hover:bg-amber-50/40 transition-colors"><td class="py-3.5 px-4 font-bold text-gray-900">سبيكة ذهب 10 جرام (عيار 24)</td><td class="py-3.5 px-4 text-gold-700 font-bold">${(g24 * 10).toFixed(2)} ر.س</td><td class="py-3.5 px-4 text-emerald-600 font-medium text-xs md:text-sm">معفى (نقاء 99%)</td></tr>
+          <tr class="hover:bg-amber-50/40 transition-colors"><td class="py-3.5 px-4 font-bold text-gray-900">سبيكة ذهب 50 جرام (عيار 24)</td><td class="py-3.5 px-4 text-gold-700 font-bold">${(g24 * 50).toFixed(2)} ر.س</td><td class="py-3.5 px-4 text-emerald-600 font-medium text-xs md:text-sm">معفى (نقاء 99%)</td></tr>
+          <tr class="hover:bg-amber-50/40 transition-colors"><td class="py-3.5 px-4 font-bold text-gray-900">سبيكة ذهب 100 جرام (عيار 24)</td><td class="py-3.5 px-4 text-gold-700 font-bold">${(g24 * 100).toFixed(2)} ر.س</td><td class="py-3.5 px-4 text-emerald-600 font-medium text-xs md:text-sm">معفى (نقاء 99%)</td></tr>
+          <tr class="hover:bg-amber-50/40 transition-colors"><td class="py-3.5 px-4 font-bold text-gray-900">كيلو ذهب (1000 جرام عيار 24)</td><td class="py-3.5 px-4 text-gold-700 font-bold">${data.units.kilo_sar} ر.س</td><td class="py-3.5 px-4 text-emerald-600 font-medium text-xs md:text-sm">معفى (نقاء 99%)</td></tr>
+        `;
+      }
+
+      // 4. Pass live 24K rate to the Gold Calculator component
+      window.currentGram24K = parseFloat(data.rates["24K"].gram_buy);
+      if (typeof window.recalculateGold === 'function') {
+        window.recalculateGold();
+      }
+
     } catch (error) {
       console.error('Error fetching live gold rates:', error);
     }
   }
 
-  // Fetch immediately on load
+  // Execute immediately
   fetchLiveRates();
 </script>
 </Layout>

@@ -1,0 +1,98 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const lastUpdated = new Date().toLocaleTimeString('ar-SA', { 
+  hour: '2-digit', 
+  minute: '2-digit', 
+  timeZone: 'Asia/Riyadh' 
+});
+---
+
+<Layout 
+  title="سعر بيع الذهب المستعمل اليوم في السعودية | بدون مصنعية"
+  description="تعرف على سعر بيع الذهب المستعمل (الكسر) اليوم في السعودية عيار 21 وعيار 18 لمحلات الصاغة. تحديث مباشر لأسعار شراء الذهب من المستهلك بدون خصم مصنعية."
+>
+  <nav class="max-w-6xl mx-auto px-4 py-4 text-xs md:text-sm text-gray-500" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 space-x-reverse">
+      <li><a href="/" class="hover:text-gold-700 font-medium">الرئيسية</a></li>
+      <li><span class="mx-1">/</span></li>
+      <li class="text-gold-700 font-semibold">سعر بيع الذهب المستعمل</li>
+    </ol>
+  </nav>
+
+  <main class="max-w-6xl mx-auto px-4 pb-16">
+    <header class="border-b border-gray-200 pb-6 mb-8 text-right">
+      <h1 class="text-2xl md:text-4xl font-extrabold text-gray-900 tracking-tight mb-3">
+        سعر بيع الذهب المستعمل اليوم في السعودية (شراء المحلات)
+      </h1>
+      <p class="text-gray-600 text-sm md:text-base max-w-4xl leading-relaxed">
+        هذا الجدول مخصص للأفراد الراغبين في <strong>بيع ذهبهم المستعمل (الكسر)</strong> لمحلات الصاغة في السعودية. الأسعار المعروضة تمثل قيمة الذهب الصافي فقط بناءً على الشاشة العالمية، حيث لا يتم خصم أي مبالغ تحت مسمى "المصنعية" عند البيع للمحل.
+      </p>
+    </header>
+
+    <section class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-10">
+      <div class="px-6 py-4 border-b border-gray-200 bg-amber-50/50 flex flex-wrap justify-between items-center gap-2">
+        <h2 class="font-bold text-base md:text-lg text-gray-800">أسعار شراء المحلات للذهب المستعمل من الأفراد</h2>
+        <span class="live-timestamp text-xs font-semibold text-amber-900 bg-amber-100 px-2 py-1 rounded">{lastUpdated}</span>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-right border-collapse">
+          <thead>
+            <tr class="bg-gray-100 text-gray-700 text-xs md:text-sm font-semibold border-b">
+              <th class="py-3 px-4">العيار</th>
+              <th class="py-3 px-4">سعر البيع للمحل (الجرام بالريال)</th>
+              <th class="py-3 px-4">ملاحظات الصاغة</th>
+            </tr>
+          </thead>
+          <tbody id="used-rates-body" class="divide-y divide-gray-200 text-sm">
+            <!-- Populated by JS -->
+            <tr><td colspan="3" class="text-center py-4 text-gray-400">جاري تحميل الأسعار المباشرة...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+      <article class="p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
+        <h3 class="font-bold text-lg text-gray-900 mb-2">هل يتم خصم المصنعية عند بيع الذهب المستعمل؟</h3>
+        <p class="text-sm text-gray-600 leading-relaxed">
+          <strong>لا.</strong> حسب أنظمة سوق الذهب في السعودية، عند بيعك لمشغولاتك الذهبية القديمة للمحل، يتم حساب السعر بناءً على الوزن الصافي للذهب مضروباً في السعر اللحظي للعيار. المصنعية التي دفعتها عند الشراء لا تسترد.
+        </p>
+      </article>
+
+      <article class="p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
+        <h3 class="font-bold text-lg text-gray-900 mb-2">هل أدفع ضريبة عند بيع ذهبي للمحل؟</h3>
+        <p class="text-sm text-gray-600 leading-relaxed">
+          <strong>لا.</strong> الأفراد لا يدفعون ولا يُخصم منهم ضريبة القيمة المضافة (15%) عند بيع الذهب المستعمل لمحلات الصاغة. الضريبة تُفرض فقط عند قيامك بشراء ذهب جديد من المحل، وتُحسب على قيمة المصنعية فقط.
+        </p>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    async function fetchUsedRates() {
+      try {
+        const response = await fetch('https://saudi-gold-api.2019ag138.workers.dev');
+        const data = await response.json();
+        
+        const timeElements = document.querySelectorAll('.live-timestamp');
+        timeElements.forEach(el => el.textContent = data.timestamp);
+
+        const tbody = document.getElementById('used-rates-body');
+        if (tbody && data.rates) {
+          // We only display the 'gram_sell' price (what the shop buys it for)
+          tbody.innerHTML = Object.values(data.rates).map(row => `
+            <tr class="hover:bg-amber-50/40 transition-colors">
+              <td class="py-3.5 px-4 font-bold text-gray-900">${row.karat}</td>
+              <td class="py-3.5 px-4 text-emerald-700 font-bold text-lg">${row.gram_sell} ر.س</td>
+              <td class="py-3.5 px-4 text-gray-500 text-xs">شراء كسر بدون مصنعية</td>
+            </tr>
+          `).join('');
+        }
+      } catch (error) {
+        console.error('Error fetching used gold rates:', error);
+      }
+    }
+    fetchUsedRates();
+  </script>
+</Layout>
