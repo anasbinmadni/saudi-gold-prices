@@ -175,9 +175,15 @@ const bullions = [
         const response = await fetch('https://saudi-gold-api.2019ag138.workers.dev');
         const data = await response.json();
         
-        // Update timestamps
-        const timeElements = document.querySelectorAll('.live-timestamp');
-        timeElements.forEach(el => el.textContent = data.timestamp);
+        // 1. Calculate the exact current Riyadh time dynamically in the browser
+const saudiTime = new Date().toLocaleTimeString('ar-SA', { 
+  hour: '2-digit', 
+  minute: '2-digit', 
+  timeZone: 'Asia/Riyadh' 
+});
+
+const timeElements = document.querySelectorAll('.live-timestamp');
+timeElements.forEach(el => el.textContent = saudiTime);
 
         // Update Bullion Table
         const bullionBody = document.getElementById('bullion-table-body');

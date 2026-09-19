@@ -145,8 +145,15 @@ const lastUpdated = new Date().toLocaleTimeString('ar-SA', {
         const data = await response.json();
         
         // Update timestamps
-        const timeElements = document.querySelectorAll('.live-timestamp');
-        timeElements.forEach(el => el.textContent = data.timestamp);
+        // 1. Calculate the exact current Riyadh time dynamically in the browser
+const saudiTime = new Date().toLocaleTimeString('ar-SA', { 
+  hour: '2-digit', 
+  minute: '2-digit', 
+  timeZone: 'Asia/Riyadh' 
+});
+
+const timeElements = document.querySelectorAll('.live-timestamp');
+timeElements.forEach(el => el.textContent = saudiTime);
 
         if (data.rates && data.rates["21K"]) {
           document.getElementById('price-21k-sell').textContent = data.rates["21K"].gram_sell;
