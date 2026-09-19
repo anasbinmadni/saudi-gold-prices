@@ -15,21 +15,24 @@ const todayDate = new Date().toISOString().split('T')[0];
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YPCJE6C6D"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-0YPCJE6C6D');
-</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="canonical" href={canonicalURL} />
   <title>{title}</title>
   <meta name="description" content={description} />
   
+  <!-- Google Analytics 4 (Added is:inline) -->
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-0YPCJE6C6D"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0YPCJE6C6D');
+  </script>
+
+  <!-- Google AdSense (Added is:inline) -->
+  <script is:inline async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7795085851692471" crossorigin="anonymous"></script>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
