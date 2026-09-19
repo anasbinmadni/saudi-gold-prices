@@ -1,4 +1,7 @@
 ---
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
 interface Props {
   title: string;
   description: string;
@@ -84,7 +87,15 @@ const todayDate = new Date().toISOString().split('T')[0];
     ]
   })} />
 </head>
-<body class="bg-gray-50 text-gray-900 font-arabic antialiased min-h-screen">
-  <slot />
+<body class="bg-gray-50 text-gray-900 font-arabic antialiased min-h-screen flex flex-col">
+  
+  <SiteHeader />
+  
+  <div class="flex-grow">
+    <slot />
+  </div>
+
+  <SiteFooter />
+  
 </body>
 </html>

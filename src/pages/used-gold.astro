@@ -12,7 +12,7 @@ const lastUpdated = new Date().toLocaleTimeString('ar-SA', {
   title="سعر بيع الذهب المستعمل اليوم في السعودية | بدون مصنعية"
   description="تعرف على سعر بيع الذهب المستعمل (الكسر) اليوم في السعودية عيار 21 وعيار 18 لمحلات الصاغة. تحديث مباشر لأسعار شراء الذهب من المستهلك بدون خصم مصنعية."
 >
-  <nav class="max-w-6xl mx-auto px-4 py-4 text-xs md:text-sm text-gray-500" aria-label="Breadcrumb">
+  <nav class="max-w-7xl mx-auto px-4 py-4 text-xs md:text-sm text-gray-500" aria-label="Breadcrumb">
     <ol class="flex items-center space-x-2 space-x-reverse">
       <li><a href="/" class="hover:text-gold-700 font-medium">الرئيسية</a></li>
       <li><span class="mx-1">/</span></li>
@@ -20,7 +20,7 @@ const lastUpdated = new Date().toLocaleTimeString('ar-SA', {
     </ol>
   </nav>
 
-  <main class="max-w-6xl mx-auto px-4 pb-16">
+  <div class="max-w-7xl mx-auto px-4 pb-16">
     <header class="border-b border-gray-200 pb-6 mb-8 text-right">
       <h1 class="text-2xl md:text-4xl font-extrabold text-gray-900 tracking-tight mb-3">
         سعر بيع الذهب المستعمل اليوم في السعودية (شراء المحلات)
@@ -30,44 +30,88 @@ const lastUpdated = new Date().toLocaleTimeString('ar-SA', {
       </p>
     </header>
 
-    <section class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-10">
-      <div class="px-6 py-4 border-b border-gray-200 bg-amber-50/50 flex flex-wrap justify-between items-center gap-2">
-        <h2 class="font-bold text-base md:text-lg text-gray-800">أسعار شراء المحلات للذهب المستعمل من الأفراد</h2>
-        <span class="live-timestamp text-xs font-semibold text-amber-900 bg-amber-100 px-2 py-1 rounded">{lastUpdated}</span>
-      </div>
-      <div class="overflow-x-auto">
-        <table class="w-full text-right border-collapse">
-          <thead>
-            <tr class="bg-gray-100 text-gray-700 text-xs md:text-sm font-semibold border-b">
-              <th class="py-3 px-4">العيار</th>
-              <th class="py-3 px-4">سعر البيع للمحل (الجرام بالريال)</th>
-              <th class="py-3 px-4">ملاحظات الصاغة</th>
-            </tr>
-          </thead>
-          <tbody id="used-rates-body" class="divide-y divide-gray-200 text-sm">
-            <!-- Populated by JS -->
-            <tr><td colspan="3" class="text-center py-4 text-gray-400">جاري تحميل الأسعار المباشرة...</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+    <!-- The 12-Column Grid Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- MAIN CONTENT (8 Columns) -->
+      <main class="lg:col-span-8 space-y-10">
+        
+        <!-- AdSense Top Banner Placeholder -->
+        <div class="w-full min-h-[90px] bg-gray-50 flex items-center justify-center border border-gray-200 rounded-lg text-gray-400 text-xs text-center" aria-hidden="true">
+          <!-- Google AdSense Code will inject here -->
+          [مساحة إعلانية أفقية]
+        </div>
 
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-      <article class="p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
-        <h3 class="font-bold text-lg text-gray-900 mb-2">هل يتم خصم المصنعية عند بيع الذهب المستعمل؟</h3>
-        <p class="text-sm text-gray-600 leading-relaxed">
-          <strong>لا.</strong> حسب أنظمة سوق الذهب في السعودية، عند بيعك لمشغولاتك الذهبية القديمة للمحل، يتم حساب السعر بناءً على الوزن الصافي للذهب مضروباً في السعر اللحظي للعيار. المصنعية التي دفعتها عند الشراء لا تسترد.
-        </p>
-      </article>
+        <section class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+          <div class="px-6 py-4 border-b border-gray-200 bg-amber-50/50 flex flex-wrap justify-between items-center gap-2">
+            <h2 class="font-bold text-base md:text-lg text-gray-800">أسعار شراء المحلات للذهب المستعمل من الأفراد</h2>
+            <span class="live-timestamp text-xs font-semibold text-amber-900 bg-amber-100 px-2 py-1 rounded">{lastUpdated}</span>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-right border-collapse">
+              <thead>
+                <tr class="bg-gray-100 text-gray-700 text-xs md:text-sm font-semibold border-b">
+                  <th class="py-3 px-4">العيار</th>
+                  <th class="py-3 px-4">سعر البيع للمحل (الجرام بالريال)</th>
+                  <th class="py-3 px-4">ملاحظات الصاغة</th>
+                </tr>
+              </thead>
+              <tbody id="used-rates-body" class="divide-y divide-gray-200 text-sm">
+                <!-- Populated by JS -->
+                <tr><td colspan="3" class="text-center py-4 text-gray-400">جاري تحميل الأسعار المباشرة...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
 
-      <article class="p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
-        <h3 class="font-bold text-lg text-gray-900 mb-2">هل أدفع ضريبة عند بيع ذهبي للمحل؟</h3>
-        <p class="text-sm text-gray-600 leading-relaxed">
-          <strong>لا.</strong> الأفراد لا يدفعون ولا يُخصم منهم ضريبة القيمة المضافة (15%) عند بيع الذهب المستعمل لمحلات الصاغة. الضريبة تُفرض فقط عند قيامك بشراء ذهب جديد من المحل، وتُحسب على قيمة المصنعية فقط.
-        </p>
-      </article>
-    </section>
-  </main>
+        <!-- AdSense Middle Content Placeholder -->
+        <div class="w-full min-h-[250px] bg-gray-50 flex items-center justify-center border border-gray-200 rounded-lg text-gray-400 text-xs text-center" aria-hidden="true">
+          <!-- Google AdSense Square/Responsive Code will inject here -->
+          [مساحة إعلانية داخل المحتوى]
+        </div>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <article class="p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <h3 class="font-bold text-lg text-gray-900 mb-2">هل يتم خصم المصنعية عند بيع الذهب المستعمل؟</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              <strong>لا.</strong> حسب أنظمة سوق الذهب في السعودية، عند بيعك لمشغولاتك الذهبية القديمة للمحل، يتم حساب السعر بناءً على الوزن الصافي للذهب مضروباً في السعر اللحظي للعيار. المصنعية التي دفعتها عند الشراء لا تسترد.
+            </p>
+          </article>
+
+          <article class="p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <h3 class="font-bold text-lg text-gray-900 mb-2">هل أدفع ضريبة عند بيع ذهبي للمحل؟</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              <strong>لا.</strong> الأفراد لا يدفعون ولا يُخصم منهم ضريبة القيمة المضافة (15%) عند بيع الذهب المستعمل لمحلات الصاغة. الضريبة تُفرض فقط عند قيامك بشراء ذهب جديد من المحل، وتُحسب على قيمة المصنعية فقط.
+            </p>
+          </article>
+        </section>
+
+      </main>
+
+      <!-- SIDEBAR COLUMN (4 Columns - Sticky AdSense Placement) -->
+      <aside class="lg:col-span-4 space-y-6 hidden lg:block">
+        <div class="sticky top-24">
+          
+          <!-- Call to Action Widget -->
+          <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 mb-6 text-center">
+             <h3 class="font-bold text-gray-900 mb-3">شراء ذهب جديد؟</h3>
+             <a href="/" class="block w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-4 rounded-lg transition shadow-sm">
+               احسب سعر الشراء بالمصنعية والضريبة
+             </a>
+          </div>
+
+          <!-- Vertical AdSense Placeholder -->
+          <div class="w-full h-[600px] bg-gray-50 border border-gray-200 flex flex-col items-center justify-center rounded-xl text-gray-400 text-sm">
+             <span class="mb-2 text-2xl">🪙</span>
+             <span>[مساحة إعلانية عمودية]</span>
+             <span class="text-xs mt-1 text-gray-300">SkyScraper Ad (300x600)</span>
+          </div>
+
+        </div>
+      </aside>
+
+    </div>
+  </div>
 
   <script>
     async function fetchUsedRates() {
