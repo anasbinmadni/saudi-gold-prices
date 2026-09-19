@@ -1,0 +1,167 @@
+---
+import Layout from '../layouts/Layout.astro';
+import GoldCalculator from '../components/GoldCalculator.astro';
+
+const lastUpdated = new Date().toLocaleTimeString('ar-SA', { 
+  hour: '2-digit', 
+  minute: '2-digit', 
+  timeZone: 'Asia/Riyadh' 
+});
+---
+
+<Layout 
+  title="سعر الذهب عيار 21 اليوم في السعودية | شراء وبيع"
+  description="تحديث مباشر لسعر جرام الذهب عيار 21 اليوم في السعودية. تعرف على أسعار الشراء بالمصنعية وأسعار البيع للمحلات (الكسر) لحظة بلحظة."
+>
+  <nav class="max-w-7xl mx-auto px-4 py-4 text-xs md:text-sm text-gray-500" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 space-x-reverse">
+      <li><a href="/" class="hover:text-gold-700 font-medium">الرئيسية</a></li>
+      <li><span class="mx-1">/</span></li>
+      <li class="text-gold-700 font-semibold">سعر الذهب عيار 21</li>
+    </ol>
+  </nav>
+
+  <div class="max-w-7xl mx-auto px-4 pb-16">
+    <header class="border-b border-gray-200 pb-6 mb-8 text-right">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold mb-3">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+       تحديث مباشر: بتوقيت الرياض (<span class="live-timestamp">{lastUpdated}</span>)
+      </div>
+      <h1 class="text-2xl md:text-4xl font-extrabold text-gray-900 tracking-tight mb-3">
+        سعر الذهب عيار 21 اليوم في السعودية
+      </h1>
+      <p class="text-gray-600 text-sm md:text-base max-w-4xl leading-relaxed">
+        عيار 21 هو العيار الأكثر شعبية وتداولاً في صناعة الحلي والمجوهرات في المملكة العربية السعودية. يعرض هذا الجدول السعر اللحظي لجرام عيار 21 للبيع والشراء.
+      </p>
+    </header>
+
+    <!-- The 12-Column Grid Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- MAIN CONTENT (8 Columns) -->
+      <main class="lg:col-span-8 space-y-10">
+        
+        <div class="w-full min-h-[90px] bg-gray-50 flex items-center justify-center border border-gray-200 rounded-lg text-gray-400 text-xs text-center" aria-hidden="true">
+          [مساحة إعلانية أفقية]
+        </div>
+
+        <section class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+          <div class="px-6 py-4 border-b border-gray-200 bg-amber-50/50 flex justify-between items-center">
+            <h2 class="font-bold text-base md:text-lg text-gray-800">تسعير عيار 21 المباشر (بدون مصنعية)</h2>
+            <span class="text-xs text-amber-700 font-bold">نقاء 87.5%</span>
+          </div>
+          
+          <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-gray-50 border border-gray-200 p-6 rounded-xl text-center">
+              <span class="block text-sm text-gray-500 font-semibold mb-2">سعر بيع المستهلك للمحل (كاش / مستعمل)</span>
+              <span id="price-21k-sell" class="font-extrabold text-3xl text-gray-900">0.00</span>
+              <span class="text-sm font-bold text-gray-600">ر.س / جرام</span>
+            </div>
+
+            <div class="bg-emerald-50 border border-emerald-200 p-6 rounded-xl text-center">
+              <span class="block text-sm text-emerald-800 font-semibold mb-2">سعر شراء المستهلك من المحل (خام جديد)</span>
+              <span id="price-21k-buy" class="font-extrabold text-3xl text-emerald-600">0.00</span>
+              <span class="text-sm font-bold text-emerald-800">ر.س / جرام</span>
+            </div>
+          </div>
+          
+          <div class="px-6 py-3 bg-gray-50 text-xs text-gray-500 border-t border-gray-100">
+            * السعر الظاهر باللون الأخضر هو سعر الجرام الخام. تضاف عليه المصنعية (15 إلى 55 ريال) وضريبة القيمة المضافة عند الشراء.
+          </div>
+        </section>
+
+        <!-- Interactive Gold Calculator Component -->
+        <GoldCalculator />
+
+        <div class="w-full min-h-[250px] bg-gray-50 flex items-center justify-center border border-gray-200 rounded-lg text-gray-400 text-xs text-center" aria-hidden="true">
+          [مساحة إعلانية داخل المحتوى]
+        </div>
+
+        <!-- Educational & AEO Content Block -->
+        <section>
+          <h2 class="text-xl font-bold text-gray-900 mb-4 border-r-4 border-amber-500 pr-3">كل ما يهمك عن الذهب عيار 21</h2>
+          <div class="space-y-4">
+            <details class="group bg-white border border-gray-200 rounded-lg shadow-sm open:shadow-md transition-all">
+              <summary class="flex justify-between items-center font-semibold cursor-pointer list-none p-4 text-gray-900">
+                <span>ما هو الذهب عيار 21 وما نسبة نقائه؟</span>
+                <span class="transition group-open:rotate-180 text-amber-500">▼</span>
+              </summary>
+              <p class="text-sm text-gray-600 leading-relaxed px-4 pb-4 mt-2 border-t border-gray-100 pt-3">
+                الذهب عيار 21 يتكون من 21 جزءاً من الذهب الخالص و 3 أجزاء من معادن أخرى (مثل النحاس أو الفضة) لإعطائه الصلابة اللازمة للتشكيل. نسبة نقاء الذهب فيه تبلغ <strong>87.5%</strong>، ويُرمز له عالمياً بالرقم (875).
+              </p>
+            </details>
+
+            <details class="group bg-white border border-gray-200 rounded-lg shadow-sm open:shadow-md transition-all">
+              <summary class="flex justify-between items-center font-semibold cursor-pointer list-none p-4 text-gray-900">
+                <span>أيهما أفضل عيار 21 أم عيار 18؟</span>
+                <span class="transition group-open:rotate-180 text-amber-500">▼</span>
+              </summary>
+              <p class="text-sm text-gray-600 leading-relaxed px-4 pb-4 mt-2 border-t border-gray-100 pt-3">
+                عيار 21 يعتبر أفضل من حيث القيمة الاستثمارية والاحتفاظ بالمال لأن نسبة الذهب الخالص فيه أعلى ومصنعيته تُرد بنسبة أكبر عند البيع. عيار 18 يتميز بصلابة أعلى وتصاميم عصرية أرق، لكنه يفقد الكثير من قيمته عند إعادة البيع بسبب ارتفاع مصنعيته.
+              </p>
+            </details>
+
+            <details class="group bg-white border border-gray-200 rounded-lg shadow-sm open:shadow-md transition-all">
+              <summary class="flex justify-between items-center font-semibold cursor-pointer list-none p-4 text-gray-900">
+                <span>ما هو الجنيه الذهب عيار 21؟</span>
+                <span class="transition group-open:rotate-180 text-amber-500">▼</span>
+              </summary>
+              <p class="text-sm text-gray-600 leading-relaxed px-4 pb-4 mt-2 border-t border-gray-100 pt-3">
+                الجنيه الذهب السعودي هو قطعة نقدية ذهبية استثمارية، يُصنع قياسياً من عيار 21، ويبلغ وزنه المعتمد <strong>8 جرامات</strong>. يعتبر خياراً ممتازاً للاستثمار لكونه معفى من الضريبة وتكلفة مصنعيته منخفضة جداً.
+              </p>
+            </details>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- SIDEBAR COLUMN -->
+      <aside class="lg:col-span-4 space-y-6 hidden lg:block">
+        <div class="sticky top-24">
+          
+          <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 mb-6 text-center">
+             <h3 class="font-bold text-gray-900 mb-3">أسعار السبائك الصافية</h3>
+             <a href="/bullion" class="block w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-4 rounded-lg transition shadow-sm">
+               شاهد أسعار السبائك المعفاة من الضريبة
+             </a>
+          </div>
+
+          <div class="w-full h-[600px] bg-gray-50 border border-gray-200 flex flex-col items-center justify-center rounded-xl text-gray-400 text-sm">
+             <span class="mb-2 text-2xl">🪙</span>
+             <span>[مساحة إعلانية عمودية]</span>
+             <span class="text-xs mt-1 text-gray-300">SkyScraper Ad (300x600)</span>
+          </div>
+
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <script>
+    async function fetch21kRates() {
+      try {
+        const response = await fetch('https://saudi-gold-api.2019ag138.workers.dev');
+        const data = await response.json();
+        
+        // Update timestamps
+        const timeElements = document.querySelectorAll('.live-timestamp');
+        timeElements.forEach(el => el.textContent = data.timestamp);
+
+        if (data.rates && data.rates["21K"]) {
+          document.getElementById('price-21k-sell').textContent = data.rates["21K"].gram_sell;
+          document.getElementById('price-21k-buy').textContent = data.rates["21K"].gram_buy;
+          
+          // Pass live 24K rate to the Gold Calculator component
+          window.currentGram24K = parseFloat(data.rates["24K"].gram_buy);
+          if (typeof window.recalculateGold === 'function') {
+            window.recalculateGold();
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching 21K gold rates:', error);
+      }
+    }
+    fetch21kRates();
+  </script>
+</Layout>

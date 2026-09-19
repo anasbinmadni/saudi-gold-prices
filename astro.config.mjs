@@ -1,7 +1,12 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://saudigoldprices.pages.dev', // Replace with your final domain
-  integrations: [tailwind()]
+  // This tells Astro exactly what your live domain is for SEO tags
+  site: 'https://saudigoldrates.com',
+  integrations: [
+    tailwind(),
+    sitemap()
+  ],
 });
