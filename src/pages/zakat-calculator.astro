@@ -37,7 +37,7 @@ const lastUpdated = new Date().toLocaleTimeString('ar-SA', {
       <main class="lg:col-span-8 space-y-10">
         
         <!-- AdSense Top Banner Placeholder -->
-        <div class="w-full min-h-[90px] bg-gray-50 flex items-center justify-center border border-gray-200 rounded-lg text-gray-400 text-xs text-center" aria-hidden="true">
+        <div class="w-full min-h-[90px] bg-gray-50 flex items-center justify-center border border-gray-200 rounded-lg text-gray-500 text-xs text-center" aria-hidden="true">
           <!-- Google AdSense Code will inject here -->
           [مساحة إعلانية أفقية]
         </div>
@@ -76,8 +76,8 @@ const lastUpdated = new Date().toLocaleTimeString('ar-SA', {
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div class="bg-white p-4 rounded-lg border border-gray-200 text-center">
                 <span class="block text-sm text-gray-500 mb-1">هل بلغ النصاب؟</span>
-                <span id="nisab-status" class="font-bold text-xl text-gray-400">بانتظار الإدخال</span>
-                <p id="nisab-note" class="text-[11px] text-gray-400 mt-1">النصاب = 85 جرام عيار 24</p>
+                <span id="nisab-status" class="font-bold text-xl text-gray-500">بانتظار الإدخال</span>
+                <p id="nisab-note" class="text-[11px] text-gray-500 mt-1">النصاب = 85 جرام عيار 24</p>
               </div>
 
               <div class="bg-white p-4 rounded-lg border border-gray-200 text-center">
@@ -89,14 +89,14 @@ const lastUpdated = new Date().toLocaleTimeString('ar-SA', {
 
             <div class="mt-4 bg-emerald-50 border border-emerald-200 p-6 rounded-lg text-center">
               <span class="block text-sm text-emerald-800 font-bold mb-1">مقدار الزكاة الواجب إخراجها (2.5%)</span>
-              <span id="zakat-due" class="font-extrabold text-4xl text-emerald-600">0.00</span>
+              <span id="zakat-due" class="font-extrabold text-4xl text-emerald-700">0.00</span>
               <span class="text-sm font-bold text-emerald-800">ريال سعودي</span>
             </div>
           </section>
         </div>
 
         <!-- AdSense Middle Content Placeholder -->
-        <div class="w-full min-h-[250px] bg-gray-50 flex items-center justify-center border border-gray-200 rounded-lg text-gray-400 text-xs text-center" aria-hidden="true">
+        <div class="w-full min-h-[250px] bg-gray-50 flex items-center justify-center border border-gray-200 rounded-lg text-gray-500 text-xs text-center" aria-hidden="true">
           <!-- Google AdSense Square/Responsive Code will inject here -->
           [مساحة إعلانية داخل المحتوى]
         </div>
@@ -146,7 +146,7 @@ const lastUpdated = new Date().toLocaleTimeString('ar-SA', {
           </div>
 
           <!-- Vertical AdSense Placeholder -->
-          <div class="w-full h-[600px] bg-gray-50 border border-gray-200 flex flex-col items-center justify-center rounded-xl text-gray-400 text-sm">
+          <div class="w-full h-[600px] bg-gray-50 border border-gray-200 flex flex-col items-center justify-center rounded-xl text-gray-500 text-sm">
              <span class="mb-2 text-2xl">🪙</span>
              <span>[مساحة إعلانية عمودية]</span>
              <span class="text-xs mt-1 text-gray-300">SkyScraper Ad (300x600)</span>
@@ -193,11 +193,11 @@ const lastUpdated = new Date().toLocaleTimeString('ar-SA', {
           
           if (weight === 0) {
             statusEl.textContent = "بانتظار الإدخال";
-            statusEl.className = "font-bold text-xl text-gray-400";
+            statusEl.className = "font-bold text-xl text-gray-500";
             noteEl.textContent = "النصاب = 85 جرام عيار 24";
           } else if (reachedNisab) {
             statusEl.textContent = "نعم، بلغ النصاب";
-            statusEl.className = "font-bold text-xl text-emerald-600";
+            statusEl.className = "font-bold text-xl text-emerald-700";
             noteEl.textContent = `يعادل ${pureGoldWeight.toFixed(2)} جرام عيار 24`;
           } else {
             statusEl.textContent = "لا، لم يبلغ النصاب";

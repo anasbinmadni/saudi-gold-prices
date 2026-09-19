@@ -20,8 +20,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <title>{title}</title>
   <meta name="description" content={description} />
   
-  <!-- Preconnect to API Worker -->
-  <link rel="preconnect" href="https://saudi-gold-api.2019ag138.workers.dev" crossorigin />
+  <!-- Preconnect to API Worker (Fixed: removed crossorigin) -->
+  <link rel="preconnect" href="https://saudi-gold-api.2019ag138.workers.dev" />
+  
+  <!-- Preconnect to Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
