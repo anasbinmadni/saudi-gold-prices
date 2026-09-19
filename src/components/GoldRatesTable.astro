@@ -1,0 +1,41 @@
+---
+const rates = [
+  { carat: 'عيار 24 (ذهب خالص 99.9%)', buySAR: '315.50', sellSAR: '312.20', usd: '$84.13' },
+  { carat: 'عيار 22 (تداول الخليج)', buySAR: '289.20', sellSAR: '286.00', usd: '$77.12' },
+  { carat: 'عيار 21 (الأكثر تداولاً)', buySAR: '276.10', sellSAR: '273.20', usd: '$73.62' },
+  { carat: 'عيار 18 (مشغولات عصرية)', buySAR: '236.60', sellSAR: '234.10', usd: '$63.09' },
+  { carat: 'عيار 14', buySAR: '184.00', sellSAR: '181.50', usd: '$49.06' }
+];
+---
+
+<section class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-10 max-w-6xl mx-auto px-0">
+  <div class="px-6 py-4 border-b border-gray-200 bg-amber-50/50 flex flex-wrap justify-between items-center gap-2">
+    <h2 class="font-bold text-base md:text-lg text-gray-800">أسعار جرام الذهب في محلات الصاغة السعودية (بدون مصنعية)</h2>
+    <span class="text-xs font-semibold text-amber-900 bg-amber-100 px-2 py-1 rounded">العملة: ريال سعودي (SAR)</span>
+  </div>
+  <div class="overflow-x-auto">
+    <table class="w-full text-right border-collapse">
+      <thead>
+        <tr class="bg-gray-100 text-gray-700 text-xs md:text-sm font-semibold border-b">
+          <th class="py-3 px-4">العيار والنقاء</th>
+          <th class="py-3 px-4">سعر البيع للمستهلك (كاش مستعمل)</th>
+          <th class="py-3 px-4">سعر الشراء من المحل (جديد خام)</th>
+          <th class="py-3 px-4">السعر بالدولار ($)</th>
+        </tr>
+      </thead>
+      <tbody id="rates-table-body" class="divide-y divide-gray-200 text-sm">
+        {rates.map((row) => (
+          <tr class="hover:bg-amber-50/40 transition-colors">
+            <td class="py-3.5 px-4 font-bold text-gray-900">{row.carat}</td>
+            <td class="py-3.5 px-4 text-emerald-700 font-semibold">{row.buySAR} ر.س</td>
+            <td class="py-3.5 px-4 text-gray-800 font-semibold">{row.sellSAR} ر.س</td>
+            <td class="py-3.5 px-4 text-gray-500 font-mono">{row.usd}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <div class="px-6 py-3 bg-gray-50 text-xs text-gray-500 border-t border-gray-100 leading-relaxed">
+    * ملحوظة دقيقة للمستهلك: سعر البيع هو السعر الصافي عند بيع ذهبك القديم للمحل بدون مصنعية. سعر الشراء الجديد يضاف عليه مصنعية تتراوح بين 15 إلى 55 ريال للجرام حسب التصميم.
+  </div>
+</section>

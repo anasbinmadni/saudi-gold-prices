@@ -1,0 +1,12 @@
+---
+const lastUpdated = new Date().toLocaleTimeString('ar-SA', { 
+  hour: '2-digit', 
+  minute: '2-digit', 
+  timeZone: 'Asia/Riyadh' 
+});
+---
+
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold mb-3">
+  <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+  تحديث فوري من بورصة المعادن: بتوقيت الرياض (<span class="live-timestamp">{lastUpdated}</span>)
+</div>

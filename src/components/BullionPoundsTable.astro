@@ -1,0 +1,37 @@
+---
+const bullions = [
+  { item: 'جنيه الذهب السعودي (8 جرام عيار 21)', priceSAR: '2,208.80', tax: 'معفى من الضريبة' },
+  { item: 'نصف جنيه ذهب (4 جرام عيار 21)', priceSAR: '1,104.40', tax: 'معفى من الضريبة' },
+  { item: 'سبيكة ذهب 10 جرام (عيار 24)', priceSAR: '3,218.10', tax: 'معفى (نقاء 99%)' },
+  { item: 'سبيكة ذهب 50 جرام (عيار 24)', priceSAR: '15,853.00', tax: 'معفى (نقاء 99%)' },
+  { item: 'سبيكة ذهب 100 جرام (عيار 24)', priceSAR: '31,644.00', tax: 'معفى (نقاء 99%)' },
+  { item: 'كيلو ذهب (1000 جرام عيار 24)', priceSAR: '315,500.00', tax: 'معفى (نقاء 99%)' }
+];
+---
+
+<section class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-10 max-w-6xl mx-auto px-0">
+  <div class="px-6 py-4 border-b border-gray-200 bg-amber-50/50 flex justify-between items-center">
+    <h2 class="font-bold text-base md:text-lg text-gray-800">أسعار سبائك الذهب والجنيهات الاستثمارية في السعودية</h2>
+    <span class="text-xs text-gold-700 font-bold">معفاة من الضريبة</span>
+  </div>
+  <div class="overflow-x-auto">
+    <table class="w-full text-right border-collapse">
+      <thead>
+        <tr class="bg-gray-100 text-gray-700 text-xs md:text-sm font-semibold border-b">
+          <th class="py-3 px-4">الوزن / الصنف</th>
+          <th class="py-3 px-4">السعر التقديري (SAR)</th>
+          <th class="py-3 px-4">موقف ضريبة القيمة المضافة (VAT)</th>
+        </tr>
+      </thead>
+      <tbody id="bullion-table-body" class="divide-y divide-gray-200 text-sm">
+        {bullions.map((b) => (
+          <tr class="hover:bg-amber-50/40 transition-colors">
+            <td class="py-3.5 px-4 font-bold text-gray-900">{b.item}</td>
+            <td class="py-3.5 px-4 text-gold-700 font-bold">{b.priceSAR} ر.س</td>
+            <td class="py-3.5 px-4 text-emerald-600 font-medium text-xs md:text-sm">{b.tax}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>
