@@ -1,0 +1,90 @@
+---
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const todayDate = new Date().toISOString().split('T')[0];
+---
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="canonical" href={canonicalURL} />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ar_SA" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:site_name" content="أسعار الذهب مباشر بالسعودية" />
+
+  <!-- AEO & Structured Data (Breadcrumbs, Pricing, FAQ) -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "الرئيسية",
+            "item": Astro.site
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "أسعار الذهب اليوم في السعودية",
+            "item": canonicalURL
+          }
+        ]
+      },
+      {
+        "@type": "FinancialProduct",
+        "name": "سعر الذهب عيار 21 اليوم في السعودية",
+        "description": "تحديث مباشر لأسعار الذهب عيار 21 و24 بيع وشراء في محلات الذهب السعودية بالريال والدولار",
+        "feesAndCommissionsSpecification": "شامل الضريبة وبدون مصنعية",
+        "category": "Precious Metals",
+        "currency": "SAR"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "كم سعر بيع وشراء الذهب عيار 21 اليوم في السعودية؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "يتم تسعير جرام الذهب عيار 21 اليوم في السعودية بدون مصنعية بسعر الشراء من المحلات وسعر البيع للأفراد وفقاً لتحديثات البورصة العالمية اللحظية بالريال السعودي."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "كم تبلغ قيمة مصنعية الذهب في محلات السعودية؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "تتراوح مصنعية الذهب في السعودية بين 15 إلى 50 ريال للجرام حسب التصميم، وتبلغ ضريبة القيمة المضافة 15% على المصنعية فقط في المشغولات والسبائك الاستثمارية المعفاة."
+            }
+          }
+        ]
+      }
+    ]
+  })} />
+</head>
+<body class="bg-gray-50 text-gray-900 font-arabic antialiased min-h-screen">
+  <slot />
+</body>
+</html>

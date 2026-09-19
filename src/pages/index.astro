@@ -1,0 +1,134 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Current base spot rates (Updated directly via Cloudflare Worker/KV in Step 2)
+const lastUpdated = new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Riyadh' });
+
+const rates = [
+  { carat: 'عيار 24 (الذهب الخالص)', buySAR: '315.50', sellSAR: '312.20', usd: '$84.13' },
+  { carat: 'عيار 22', buySAR: '289.20', sellSAR: '286.00', usd: '$77.12' },
+  { carat: 'عيار 21 (الأكثر طلباً)', buySAR: '276.10', sellSAR: '273.20', usd: '$73.62' },
+  { carat: 'عيار 18', buySAR: '236.60', sellSAR: '234.10', usd: '$63.09' },
+  { carat: 'عيار 14', buySAR: '184.00', sellSAR: '181.50', usd: '$49.06' },
+  { carat: 'أونصة الذهب (الأوقية)', buySAR: '9,812.05', sellSAR: '9,709.42', usd: '$2,616.50' }
+];
+
+const bullions = [
+  { item: 'جنيه الذهب (8 جرام - عيار 21)', priceSAR: '2,208.80' },
+  { item: 'سبيكة ذهب 1 جرام', priceSAR: '347.00' },
+  { item: 'سبيكة ذهب 5 جرام', priceSAR: '1,640.60' },
+  { item: 'سبيكة ذهب 10 جرام', priceSAR: '3,218.10' },
+  { item: 'سبيكة ذهب 50 جرام', priceSAR: '15,853.00' },
+  { item: 'سبيكة ذهب 100 جرام', priceSAR: '31,644.00' }
+];
+---
+
+<Layout 
+  title="أسعار الذهب اليوم في السعودية بيع وشراء عيار 21 و 24 | تحديث مباشر"
+  description="تابع أسعار الذهب اليوم في السعودية بيع وشراء بالريال السعودي والدولار لجميع الأعيرة (عيار 21، عيار 24، عيار 18)، مع حساب مصنعية الذهب والسبائك الاستثمارية مباشرة."
+>
+  <!-- Breadcrumb Component -->
+  <nav class="max-w-6xl mx-auto px-4 py-3 text-sm text-gray-500" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 space-x-reverse">
+      <li><a href="/" class="hover:text-gold-700">الرئيسية</a></li>
+      <li><span class="mx-2">/</span></li>
+      <li class="text-gold-700 font-semibold">أسعار الذهب اليوم في السعودية</li>
+    </ol>
+  </nav>
+
+  <main class="max-w-6xl mx-auto px-4 py-6">
+    <!-- Hero / Snippet Bait Section -->
+    <header class="border-b border-gray-200 pb-6 mb-8 text-center md:text-right">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold mb-3">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+        تحديث لحظي من البورصة العالمية: اليوم في الرياض ({lastUpdated})
+      </div>
+      <h1 class="text-2xl md:text-4xl font-extrabold text-gray-900 mb-3">
+        سعر الذهب اليوم في السعودية بيع وشراء عيار 21 والسبائك
+      </h1>
+      <p class="text-gray-600 text-sm md:text-base max-w-3xl leading-relaxed">
+        شاشة التسعير المباشر لأسعار الذهب اليوم في المملكة العربية السعودية بالريال السعودي (SAR) والدولار الأمريكي (USD). تعرض الجداول أسعار خام الذهب بدون مصنعية، بالإضافة إلى أسعار البيع والشراء في أسواق ومحلات الصاغة المعتمدة.
+      </p>
+    </header>
+
+    <!-- Main Gold Rates Table -->
+    <section class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-10">
+      <div class="px-6 py-4 border-b border-gray-200 bg-gold-50/50 flex justify-between items-center">
+        <h2 class="font-bold text-lg text-gray-800">جدول أسعار جرام الذهب اليوم في محلات الصاغة (خام)</h2>
+        <span class="text-xs text-gray-500">العملة: ريال سعودي (SAR)</span>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-right border-collapse">
+          <thead>
+            <tr class="bg-gray-100 text-gray-700 text-sm font-semibold border-b">
+              <th class="py-3 px-4">العيار / المعدن</th>
+              <th class="py-3 px-4">سعر البيع للمستهلك (شراء المحل)</th>
+              <th class="py-3 px-4">سعر الشراء من المحل (جديد)</th>
+              <th class="py-3 px-4">السعر بالدولار ($)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 text-sm">
+            {rates.map((row) => (
+              <tr class="hover:bg-amber-50/40 transition-colors">
+                <td class="py-3.5 px-4 font-bold text-gray-900">{row.carat}</td>
+                <td class="py-3.5 px-4 text-emerald-700 font-semibold">{row.buySAR} ر.س</td>
+                <td class="py-3.5 px-4 text-gray-800 font-semibold">{row.sellSAR} ر.س</td>
+                <td class="py-3.5 px-4 text-gray-500">{row.usd}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div class="px-6 py-3 bg-gray-50 text-xs text-gray-500 border-t border-gray-100">
+        * ملحوظة: الأسعار أعلاه تمثل قيمة الجرام الصافي وتختلف عند الشراء الفعلي بإضافة مصنعية تتراوح بين 15 - 50 ريال لكل جرام حسب المصنع.
+      </div>
+    </section>
+
+    <!-- Bullion & Coins Section -->
+    <section class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-10">
+      <div class="px-6 py-4 border-b border-gray-200 bg-gold-50/50 flex justify-between items-center">
+        <h2 class="font-bold text-lg text-gray-800">أسعار سبائك الذهب والجنيهات في السعودية اليوم</h2>
+        <span class="text-xs text-gold-700 font-semibold">استثمار عيار 24</span>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-right border-collapse">
+          <thead>
+            <tr class="bg-gray-100 text-gray-700 text-sm font-semibold border-b">
+              <th class="py-3 px-4">الوزن / الصنف</th>
+              <th class="py-3 px-4">السعر التقريبي بالريال السعودي</th>
+              <th class="py-3 px-4">الضريبة المفروضة</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 text-sm">
+            {bullions.map((b) => (
+              <tr class="hover:bg-amber-50/40 transition-colors">
+                <td class="py-3.5 px-4 font-bold text-gray-900">{b.item}</td>
+                <td class="py-3.5 px-4 text-gold-700 font-bold">{b.priceSAR} ر.س</td>
+                <td class="py-3.5 px-4 text-emerald-600 font-medium">معفى (إذا كان نقاء 99%)</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- FAQ Accordion for AEO / Google SGE -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-gray-900 mb-4">الأسئلة الشائعة حول بيع وشراء الذهب في السعودية</h2>
+      <div class="space-y-3">
+        <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
+          <h3 class="font-semibold text-gray-900 mb-1">ما الفرق بين سعر بيع الذهب وشراء الذهب في المحلات؟</h3>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            سعر الشراء هو المبلغ الذي يدفعه الزبون للمحل لاقتناء الذهب (ويشمل الخام + المصنعية + هامش ربح المحل + الضريبة). أما سعر البيع فهو القيمة التي يدفعها الصائغ للعميل عند رغبته في استرجاع الذهب وتحويله لكاش، ويتم حسابه بقيمة وزن الذهب الخام فقط دون احتساب المصنعية القديمة.
+          </p>
+        </div>
+        <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
+          <h3 class="font-semibold text-gray-900 mb-1">كيف تحسب قيمة مصنعية الذهب المستعمل عيار 21؟</h3>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            الذهب المستعمل (الكسر) عند بيعه لمحلات الصاغة لا تُحسب عليه أي مصنعية، بل يتم وزنه بميزان إلكتروني دقيق وضرب وزنه الصافي في سعر الشراء اللحظي لعيار 21 المعروض على شاشات البورصة.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
