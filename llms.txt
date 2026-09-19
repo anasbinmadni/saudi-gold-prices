@@ -1,0 +1,16 @@
+# أسعار الذهب السعودية (saudigoldrates.com)
+
+> أسعار الذهب اليومية واللحظية في المملكة العربية السعودية بالريال السعودي والدولار الأمريكي.
+
+## Core Features
+- Live 24K, 22K, 21K, and 18K gold prices updated every 15 minutes.
+- Real-time bullion and gold coin pricing (Ounces, Tolas, Kilograms).
+- Used gold (scrap gold / ذهب مستعمل وكسر) buying rates for jewelry shops.
+- Zakat Gold Calculator based on current Nisab threshold (85g 24K).
+
+## Primary URLs
+- Homepage: https://saudigoldrates.com/
+- 21-Karat Gold Rates: https://saudigoldrates.com/21-karat
+- Bullion & Coins: https://saudigoldrates.com/bullion
+- Used Gold Rates: https://saudigoldrates.com/used-gold
+- Zakat Calculator: https://saudigoldrates.com/zakat-calculator
