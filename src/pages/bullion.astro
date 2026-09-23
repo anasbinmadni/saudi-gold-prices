@@ -7,47 +7,54 @@ const lastUpdated = new Date().toLocaleTimeString('ar-SA', {
   timeZone: 'Asia/Riyadh' 
 });
 
+// Fallback static data
 const bullions = [
-  { item: 'جنيه الذهب السعودي (8 جرام عيار 21)', priceSAR: '2,208.80', tax: 'معفى من الضريبة' },
-  { item: 'نصف جنيه ذهب (4 جرام عيار 21)', priceSAR: '1,104.40', tax: 'معفى من الضريبة' },
-  { item: 'سبيكة ذهب 1 جرام (عيار 24)', priceSAR: '347.00', tax: 'معفى (نقاء 99%)' },
-  { item: 'سبيكة ذهب 5 جرام (عيار 24)', priceSAR: '1,640.60', tax: 'معفى (نقاء 99%)' },
-  { item: 'سبيكة ذهب 10 جرام (عيار 24)', priceSAR: '3,218.10', tax: 'معفى (نقاء 99%)' },
-  { item: 'سبيكة ذهب 20 جرام (عيار 24)', priceSAR: '6,436.20', tax: 'معفى (نقاء 99%)' },
-  { item: 'أونصة الذهب (31.1 جرام عيار 24)', priceSAR: '10,012.00', tax: 'معفى (نقاء 99%)' },
-  { item: 'سبيكة ذهب 50 جرام (عيار 24)', priceSAR: '15,853.00', tax: 'معفى (نقاء 99%)' },
-  { item: 'سبيكة ذهب 100 جرام (عيار 24)', priceSAR: '31,644.00', tax: 'معفى (نقاء 99%)' },
-  { item: 'كيلو ذهب (1000 جرام عيار 24)', priceSAR: '315,500.00', tax: 'معفى (نقاء 99%)' }
+  { item: 'سبيكة 1 جرام (عيار 24)', priceSAR: '347.00', purity: '99.9%' },
+  { item: 'سبيكة 5 جرام (عيار 24)', priceSAR: '1,640.60', purity: '99.9%' },
+  { item: 'سبيكة 10 جرام (عيار 24)', priceSAR: '3,218.10', purity: '99.9%' },
+  { item: 'أونصة الذهب (31.1 جرام)', priceSAR: '9,812.05', purity: '99.9%' },
+  { item: 'سبيكة 50 جرام (عيار 24)', priceSAR: '15,853.00', purity: '99.9%' },
+  { item: 'سبيكة 100 جرام (عيار 24)', priceSAR: '31,644.00', purity: '99.9%' },
+  { item: 'كيلو ذهب (1000 جرام)', priceSAR: '315,500.00', purity: '99.9%' },
+  { item: 'جنيه ذهب سعودي (8 جرام)', priceSAR: '2,208.80', purity: 'عيار 21' }
 ];
 ---
 
 <Layout 
-  title="أسعار سبائك الذهب والجنيهات في السعودية اليوم | تحديث مباشر"
-  description="تعرف على أسعار سبائك الذهب عيار 24 والجنيهات الذهبية عيار 21 في السعودية اليوم. تحديث لحظي لأسعار الأونصة، الكيلو، والجرامات المعفاة من الضريبة."
+  title="أسعار السبائك والجنيه الذهب اليوم في السعودية | تحديث مباشر"
+  description="تابع أسعار سبائك الذهب (عيار 24) والجنيهات الذهبية في السعودية محدثة لحظياً. أسعار أونصة الذهب، سبيكة 10 جرام، والكيلو مع تفاصيل الإعفاء الضريبي."
 >
   <nav class="max-w-7xl mx-auto px-4 py-4 text-xs md:text-sm text-gray-500" aria-label="Breadcrumb">
     <ol class="flex items-center space-x-2 space-x-reverse">
-      <li><a href="/" class="hover:text-gold-700 font-medium">الرئيسية</a></li>
+      <li><a href="/" class="hover:text-amber-600 font-medium transition">الرئيسية</a></li>
       <li><span class="mx-1">/</span></li>
-      <li class="text-gold-700 font-semibold">أسعار سبائك الذهب</li>
+      <li class="text-amber-700 font-semibold" aria-current="page">السبائك والجنيهات</li>
     </ol>
   </nav>
 
   <div class="max-w-7xl mx-auto px-4 pb-16">
     <header class="border-b border-gray-200 pb-6 mb-8 text-right">
-      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold mb-3">
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
-       تحديث فوري من بورصة المعادن: بتوقيت الرياض (<span class="live-timestamp">{lastUpdated}</span>)
+      
+      <!-- Modern Pill Badge for Live Status -->
+      <div class="inline-flex flex-wrap items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs md:text-sm font-semibold mb-4 shadow-sm">
+        <span class="relative flex h-2.5 w-2.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+        </span>
+        <span>تحديث فوري 🇸🇦 للسبائك:</span>
+        <span class="live-timestamp bg-white px-2 py-0.5 rounded text-emerald-900 shadow-sm border border-emerald-100 whitespace-nowrap" dir="ltr">{lastUpdated}</span>
       </div>
-      <h1 class="text-2xl md:text-4xl font-extrabold text-gray-900 tracking-tight mb-3">
-        أسعار سبائك الذهب والجنيهات الاستثمارية في السعودية
+
+      <h1 class="text-2xl md:text-4xl font-extrabold text-gray-900 tracking-tight mb-4">
+        أسعار سبائك الذهب والجنيهات في السعودية
       </h1>
+      
+      <!-- Ali Abdaal Style Highlights -->
       <p class="text-gray-600 text-sm md:text-base max-w-4xl leading-relaxed">
-        جدول التسعير المباشر لسبائك الذهب الصافي (عيار 24 بنقاء 999.9) والجنيهات الذهبية. هذه الأوزان تعتبر الخيار الأمثل للاستثمار وحفظ الثروة لكونها معفاة من ضريبة القيمة المضافة.
+        تُعد سبائك الذهب عيار 24 (بنقاء 99.9%) الملاذ الآمن والأفضل للاستثمار، حيث تتميز بكونها <span class="bg-emerald-100 text-emerald-900 px-1.5 py-0.5 rounded font-medium">معفاة تماماً من ضريبة القيمة المضافة (VAT)</span> في السعودية. تجد أدناه التسعير المباشر لجميع الأوزان ابتداءً من جرام واحد وحتى سبيكة الكيلو.
       </p>
     </header>
 
-    <!-- The 12-Column Grid Layout -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
       
       <!-- MAIN CONTENT (8 Columns) -->
@@ -55,88 +62,108 @@ const bullions = [
         
         <!-- AdSense Top Banner Placeholder -->
         <div class="w-full min-h-[90px] bg-gray-50 flex items-center justify-center border border-gray-200 rounded-lg text-gray-500 text-xs text-center" aria-hidden="true">
-          <!-- Google AdSense Code will inject here -->
-          [مساحة إعلانية أفقية]
+          [مساحة إعلانية]
         </div>
 
+        <!-- Bullion Live Rates Table -->
         <section class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-          <div class="px-6 py-4 border-b border-gray-200 bg-amber-50/50 flex justify-between items-center">
-            <h2 class="font-bold text-base md:text-lg text-gray-800">أسعار السبائك والجنيهات المباشرة</h2>
-            <span class="text-xs text-gold-700 font-bold">بدون مصنعية التاجر</span>
+          <div class="px-4 md:px-6 py-4 border-b border-gray-200 bg-amber-50/50 flex flex-wrap justify-between items-center gap-2">
+            <h2 class="font-bold text-base md:text-lg text-gray-800 flex items-center gap-2">
+              <span>🪙</span> جدول أسعار السبائك والجنيهات (تحديث مباشر)
+            </h2>
+            <span class="text-xs font-semibold text-emerald-900 bg-emerald-100 px-2 py-1 rounded shadow-sm border border-emerald-200">الأسعار معفاة من الضريبة</span>
           </div>
           <div class="overflow-x-auto">
-            <table class="w-full text-right border-collapse">
+            <table class="w-full text-right border-collapse min-w-[500px]">
               <thead>
                 <tr class="bg-gray-100 text-gray-700 text-xs md:text-sm font-semibold border-b">
-                  <th class="py-3 px-4">الوزن / الصنف</th>
-                  <th class="py-3 px-4">السعر التقديري (SAR)</th>
-                  <th class="py-3 px-4">الضريبة (VAT)</th>
+                  <th class="py-3 px-4 whitespace-nowrap">الصنف والوزن</th>
+                  <th class="py-3 px-4 whitespace-nowrap">السعر التقديري للمستهلك (SAR)</th>
+                  <th class="py-3 px-4 whitespace-nowrap">درجة النقاء</th>
                 </tr>
               </thead>
               <tbody id="bullion-table-body" class="divide-y divide-gray-200 text-sm">
                 {bullions.map((b) => (
                   <tr class="hover:bg-amber-50/40 transition-colors">
-                    <td class="py-3.5 px-4 font-bold text-gray-900">{b.item}</td>
-                    <td class="py-3.5 px-4 text-emerald-700 font-bold text-lg">{b.priceSAR} ر.س</td>
-                    <td class="py-3.5 px-4 text-gray-600 text-xs">{b.tax}</td>
+                    <td class="py-3.5 px-4 font-bold text-gray-900 whitespace-nowrap">{b.item}</td>
+                    <td class="py-3.5 px-4 text-emerald-700 font-bold whitespace-nowrap">{b.priceSAR} ر.س</td>
+                    <td class="py-3.5 px-4 text-gray-600 font-medium whitespace-nowrap">{b.purity}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
           <div class="px-6 py-3 bg-gray-50 text-xs text-gray-500 border-t border-gray-100 leading-relaxed">
-            * السعر الظاهر يمثل قيمة الذهب الخام الخالص. تضاف عمولة بسيطة (مصنعية التاجر) عند الشراء الفعلي من المحل وتختلف من شركة لأخرى (مثل بامب، سويس، أو الراجحي).
+            * السعر الموضح هو تقدير مبني على سعر الشاشة اللحظي للذهب الخام. عند الشراء من المحلات، يتم إضافة "أجرة تصنيع" (مصنعية) بسيطة جداً للسبائك تختلف حسب الشركة المصنعة.
           </div>
         </section>
 
         <!-- AdSense Middle Content Placeholder -->
         <div class="w-full min-h-[250px] bg-gray-50 flex items-center justify-center border border-gray-200 rounded-lg text-gray-500 text-xs text-center" aria-hidden="true">
-          <!-- Google AdSense Square/Responsive Code will inject here -->
-          [مساحة إعلانية داخل المحتوى]
+          [مساحة إعلانية أفقية داخل المحتوى]
         </div>
 
-        <!-- Educational & AEO Content Block -->
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <article class="p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-            <h3 class="font-bold text-lg text-gray-900 mb-2">لماذا السبائك هي الأفضل للاستثمار؟</h3>
-            <p class="text-sm text-gray-600 leading-relaxed">
-              تُصنع السبائك من الذهب الخالص عيار 24 بنسبة نقاء 999.9. تتميز بأن تكلفة مصنعيتها شبه معدومة مقارنة بالمشغولات، مما يعني أنك لا تخسر الكثير من قيمتها عند إعادة البيع.
-            </p>
-          </article>
-
-          <article class="p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-            <h3 class="font-bold text-lg text-gray-900 mb-2">نظام الإعفاء الضريبي في السعودية</h3>
-            <p class="text-sm text-gray-600 leading-relaxed">
-              وفقاً لهيئة الزكاة والضريبة والجمارك، يُعفى الذهب المخصص للاستثمار (الذي لا تقل نسبة نقائه عن 99%) من ضريبة القيمة المضافة. تُدفع الضريبة (15%) فقط على "عمولة التاجر" وليس على قيمة الذهب نفسه.
-            </p>
-          </article>
+        <!-- AEO SEO Content Block (Ali Abdaal Style) -->
+        <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:p-8">
+          <h2 class="text-xl font-bold text-gray-900 mb-6 border-r-4 border-emerald-500 pr-3">دليل الاستثمار في السبائك بالسعودية</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <h3 class="font-bold text-gray-800 mb-3 flex items-center gap-2">
+                <span>🛡️</span> الإعفاء الضريبي للسبائك
+              </h3>
+              <p class="text-sm text-gray-600 leading-relaxed">
+                وفقاً لهيئة الزكاة والضريبة والجمارك في السعودية، فإن الذهب المخصص للاستثمار (الذي لا تقل نسبة نقائه عن <span class="bg-emerald-100 text-emerald-900 px-1.5 py-0.5 rounded font-bold">99%</span> والقابل للتداول في الأسواق) يخضع لنسبة الصفر في ضريبة القيمة المضافة. هذا يشمل جميع سبائك عيار 24.
+              </p>
+            </div>
+            <div>
+              <h3 class="font-bold text-gray-800 mb-3 flex items-center gap-2">
+                <span>⚖️</span> أفضل أوزان السبائك للاستثمار
+              </h3>
+              <p class="text-sm text-gray-600 leading-relaxed">
+                يُنصح المستثمرون بشراء سبائك بوزن <span class="bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded font-bold">50 جرام إلى 100 جرام</span> (أو الأونصة 31.1 جرام). كلما زاد وزن السبيكة، انخفضت تكلفة مصنعيتها (أجرة السك) للجرام الواحد، مما يعظم من أرباحك عند البيع مقارنة بسبائك 1 جرام الصغيرة.
+              </p>
+            </div>
+          </div>
         </section>
 
-        <!-- FAQ Accordion Block (Expanded for AEO) -->
-        <section>
-          <h2 class="text-xl font-bold text-gray-900 mb-4 border-r-4 border-amber-500 pr-3">الأسئلة الشائعة حول سبائك الذهب</h2>
+        <!-- Specific FAQ for Bullions -->
+        <section class="mb-8">
+          <h2 class="text-xl font-bold text-gray-900 mb-4 border-r-4 border-amber-500 pr-3">أسئلة شائعة حول سبائك وجنيهات الذهب</h2>
           <div class="space-y-4">
             <details class="group bg-white border border-gray-200 rounded-lg shadow-sm open:shadow-md transition-all">
               <summary class="flex justify-between items-center font-semibold cursor-pointer list-none p-4 text-gray-900">
-                <span>أيهما أفضل للاستثمار: الجنيه الذهب أم السبيكة؟</span>
+                <span>هل الجنيه الذهب معفى من الضريبة في السعودية؟</span>
                 <span class="transition group-open:rotate-180 text-amber-500">
                   <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><polyline points="6 9 12 15 18 9"/></svg>
                 </span>
               </summary>
               <p class="text-sm text-gray-600 leading-relaxed px-4 pb-4 mt-2 border-t border-gray-100 pt-3">
-                السبائك (عيار 24) هي الأفضل نقاءً واستثماراً على المدى الطويل ومعفاة من الضريبة. الجنيه الذهب (عيار 21 أو 22) ممتاز أيضاً لسهولة تسييله وبيعه محلياً، ومصنعيته منخفضة جداً. الخيار يعتمد على ميزانيتك.
+                الجنيه الذهب (عيار 21 أو 22) يخضع لضريبة القيمة المضافة (15%) ولكن <span class="font-bold">على قيمة المصنعية فقط</span>، وليس على إجمالي قيمة الذهب. وذلك لأنه لا يصل إلى نسبة النقاء المطلوبة للإعفاء الكامل (99%).
               </p>
             </details>
 
             <details class="group bg-white border border-gray-200 rounded-lg shadow-sm open:shadow-md transition-all">
               <summary class="flex justify-between items-center font-semibold cursor-pointer list-none p-4 text-gray-900">
-                <span>هل يمكن بيع السبيكة بسهولة في أي محل؟</span>
+                <span>ما هي أشهر ماركات السبائك في السعودية؟</span>
                 <span class="transition group-open:rotate-180 text-amber-500">
                   <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><polyline points="6 9 12 15 18 9"/></svg>
                 </span>
               </summary>
               <p class="text-sm text-gray-600 leading-relaxed px-4 pb-4 mt-2 border-t border-gray-100 pt-3">
-                نعم، السبائك المغلفة والمختومة (خصوصاً من الشركات المعتمدة) تُشترى وتباع بسهولة بالغة في جميع محلات الصاغة في السعودية بناءً على السعر العالمي اللحظي. تأكد فقط من الاحتفاظ بالفاتورة وغلاف السبيكة.
+                تتوفر في الأسواق السعودية عدة ماركات موثوقة ومختومة مثل: سبائك الراجحي، بامب (PAMP) السويسرية، فالكامبي (Valcambi)، وسبائك ديوان الذهب. جميعها ممتازة طالما تحمل ختم النقاء وتأتي مغلفة في غلافها الأصلي.
+              </p>
+            </details>
+
+            <details class="group bg-white border border-gray-200 rounded-lg shadow-sm open:shadow-md transition-all">
+              <summary class="flex justify-between items-center font-semibold cursor-pointer list-none p-4 text-gray-900">
+                <span>هل أفتح غلاف السبيكة بعد شرائها؟</span>
+                <span class="transition group-open:rotate-180 text-amber-500">
+                  <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>
+              </summary>
+              <p class="text-sm text-gray-600 leading-relaxed px-4 pb-4 mt-2 border-t border-gray-100 pt-3">
+                لا يُنصح أبداً بفتح الغلاف البلاستيكي (الذي يحمل الرقم التسلسلي والشهادة). فتح الغلاف قد يُفقد السبيكة جزءاً من قيمتها عند إعادة البيع لأن المحل سيضطر لفحصها وتذويبها لضمان عدم التلاعب.
               </p>
             </details>
           </div>
@@ -144,15 +171,15 @@ const bullions = [
 
       </main>
 
-      <!-- SIDEBAR COLUMN (4 Columns - Sticky AdSense Placement) -->
+      <!-- SIDEBAR COLUMN (4 Columns) -->
       <aside class="lg:col-span-4 space-y-6 hidden lg:block">
         <div class="sticky top-24">
           
           <!-- Call to Action Widget -->
           <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 mb-6 text-center">
-             <h3 class="font-bold text-gray-900 mb-3">حساب الشراء للمشغولات؟</h3>
-             <a href="/" class="block w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-4 rounded-lg transition shadow-sm">
-               العودة لأسعار الجرام عيار 21
+             <h3 class="font-bold text-gray-900 mb-3 text-lg">⚖️ احسب زكاة مدخراتك</h3>
+             <a href="/zakat-calculator" class="block w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-4 rounded-lg transition shadow-sm">
+               استخدم حاسبة الزكاة الذكية
              </a>
           </div>
 
@@ -160,7 +187,7 @@ const bullions = [
           <div class="w-full h-[600px] bg-gray-50 border border-gray-200 flex flex-col items-center justify-center rounded-xl text-gray-500 text-sm">
              <span class="mb-2 text-2xl">🪙</span>
              <span>[مساحة إعلانية عمودية]</span>
-             <span class="text-xs mt-1 text-gray-300">SkyScraper Ad (300x600)</span>
+             <span class="text-xs mt-1 text-gray-400">SkyScraper Ad (300x600)</span>
           </div>
 
         </div>
@@ -170,45 +197,77 @@ const bullions = [
   </div>
 
   <script>
-    async function fetchBullionRates() {
-      try {
-        const response = await fetch('https://saudi-gold-api.2019ag138.workers.dev');
-        const data = await response.json();
-        
-        // 1. Calculate the exact current Riyadh time dynamically in the browser
-const saudiTime = new Date().toLocaleTimeString('ar-SA', { 
-  hour: '2-digit', 
-  minute: '2-digit', 
-  timeZone: 'Asia/Riyadh' 
-});
+  async function fetchLiveBullionRates() {
+    try {
+      const response = await fetch('https://saudi-gold-api.2019ag138.workers.dev');
+      const data = await response.json();
+      
+      // Update Time Badge
+      const saudiTime = new Date().toLocaleTimeString('ar-SA', { 
+        hour: '2-digit', 
+        minute: '2-digit', 
+        timeZone: 'Asia/Riyadh' 
+      });
+      const timeElements = document.querySelectorAll('.live-timestamp');
+      timeElements.forEach(el => el.textContent = saudiTime);
 
-const timeElements = document.querySelectorAll('.live-timestamp');
-timeElements.forEach(el => el.textContent = saudiTime);
+      // Hydrate Bullion Specific Table
+      const tbody = document.getElementById('bullion-table-body');
+      if (tbody && data.rates && data.rates["24K"] && data.units) {
+        const buy24k = parseFloat(data.rates["24K"].gram_buy);
+        const pound21k = parseFloat(data.units.pound_21k_sar);
+        const ounce = parseFloat(data.units.ounce_sar);
+        const kilo = parseFloat(data.units.kilo_sar);
 
-        // Update Bullion Table
-        const bullionBody = document.getElementById('bullion-table-body');
-        if (bullionBody && data.rates["24K"] && data.units) {
-          const g24 = parseFloat(data.rates["24K"].gram_buy);
-          const pound = parseFloat(data.units.pound_21k_sar);
-          const ounce = parseFloat(data.units.ounce_sar);
-          
-          bullionBody.innerHTML = `
-            <tr class="hover:bg-amber-50/40 transition-colors"><td class="py-3.5 px-4 font-bold text-gray-900">جنيه الذهب السعودي (8 جرام عيار 21)</td><td class="py-3.5 px-4 text-emerald-700 font-bold text-lg">${pound.toFixed(2)} ر.س</td><td class="py-3.5 px-4 text-gray-500 text-xs">معفى من الضريبة</td></tr>
-            <tr class="hover:bg-amber-50/40 transition-colors"><td class="py-3.5 px-4 font-bold text-gray-900">نصف جنيه ذهب (4 جرام عيار 21)</td><td class="py-3.5 px-4 text-emerald-700 font-bold text-lg">${(pound / 2).toFixed(2)} ر.س</td><td class="py-3.5 px-4 text-gray-500 text-xs">معفى من الضريبة</td></tr>
-            <tr class="hover:bg-amber-50/40 transition-colors"><td class="py-3.5 px-4 font-bold text-gray-900">سبيكة ذهب 1 جرام (عيار 24)</td><td class="py-3.5 px-4 text-emerald-700 font-bold text-lg">${(g24 * 1).toFixed(2)} ر.س</td><td class="py-3.5 px-4 text-gray-500 text-xs">معفى (نقاء 99%)</td></tr>
-            <tr class="hover:bg-amber-50/40 transition-colors"><td class="py-3.5 px-4 font-bold text-gray-900">سبيكة ذهب 5 جرام (عيار 24)</td><td class="py-3.5 px-4 text-emerald-700 font-bold text-lg">${(g24 * 5).toFixed(2)} ر.س</td><td class="py-3.5 px-4 text-gray-500 text-xs">معفى (نقاء 99%)</td></tr>
-            <tr class="hover:bg-amber-50/40 transition-colors"><td class="py-3.5 px-4 font-bold text-gray-900">سبيكة ذهب 10 جرام (عيار 24)</td><td class="py-3.5 px-4 text-emerald-700 font-bold text-lg">${(g24 * 10).toFixed(2)} ر.س</td><td class="py-3.5 px-4 text-gray-500 text-xs">معفى (نقاء 99%)</td></tr>
-            <tr class="hover:bg-amber-50/40 transition-colors"><td class="py-3.5 px-4 font-bold text-gray-900">سبيكة ذهب 20 جرام (عيار 24)</td><td class="py-3.5 px-4 text-emerald-700 font-bold text-lg">${(g24 * 20).toFixed(2)} ر.س</td><td class="py-3.5 px-4 text-gray-500 text-xs">معفى (نقاء 99%)</td></tr>
-            <tr class="hover:bg-amber-50/40 transition-colors bg-amber-50"><td class="py-3.5 px-4 font-bold text-gray-900">أونصة الذهب (31.1 جرام عيار 24)</td><td class="py-3.5 px-4 text-emerald-700 font-extrabold text-lg">${ounce.toFixed(2)} ر.س</td><td class="py-3.5 px-4 text-gray-500 text-xs">معفى (نقاء 99%)</td></tr>
-            <tr class="hover:bg-amber-50/40 transition-colors"><td class="py-3.5 px-4 font-bold text-gray-900">سبيكة ذهب 50 جرام (عيار 24)</td><td class="py-3.5 px-4 text-emerald-700 font-bold text-lg">${(g24 * 50).toFixed(2)} ر.س</td><td class="py-3.5 px-4 text-gray-500 text-xs">معفى (نقاء 99%)</td></tr>
-            <tr class="hover:bg-amber-50/40 transition-colors"><td class="py-3.5 px-4 font-bold text-gray-900">سبيكة ذهب 100 جرام (عيار 24)</td><td class="py-3.5 px-4 text-emerald-700 font-bold text-lg">${(g24 * 100).toFixed(2)} ر.س</td><td class="py-3.5 px-4 text-gray-500 text-xs">معفى (نقاء 99%)</td></tr>
-            <tr class="hover:bg-amber-50/40 transition-colors"><td class="py-3.5 px-4 font-bold text-gray-900">كيلو ذهب (1000 جرام عيار 24)</td><td class="py-3.5 px-4 text-emerald-700 font-bold text-lg">${data.units.kilo_sar} ر.س</td><td class="py-3.5 px-4 text-gray-500 text-xs">معفى (نقاء 99%)</td></tr>
-          `;
-        }
-      } catch (error) {
-        console.error('Error fetching bullion rates:', error);
+        tbody.innerHTML = `
+          <tr class="hover:bg-amber-50/40 transition-colors">
+            <td class="py-3.5 px-4 font-bold text-gray-900 whitespace-nowrap">سبيكة 1 جرام (عيار 24)</td>
+            <td class="py-3.5 px-4 text-emerald-700 font-bold whitespace-nowrap">${(buy24k * 1).toFixed(2)} ر.س</td>
+            <td class="py-3.5 px-4 text-gray-600 font-medium whitespace-nowrap">99.9%</td>
+          </tr>
+          <tr class="hover:bg-amber-50/40 transition-colors">
+            <td class="py-3.5 px-4 font-bold text-gray-900 whitespace-nowrap">سبيكة 5 جرام (عيار 24)</td>
+            <td class="py-3.5 px-4 text-emerald-700 font-bold whitespace-nowrap">${(buy24k * 5).toFixed(2)} ر.س</td>
+            <td class="py-3.5 px-4 text-gray-600 font-medium whitespace-nowrap">99.9%</td>
+          </tr>
+          <tr class="hover:bg-amber-50/40 transition-colors">
+            <td class="py-3.5 px-4 font-bold text-gray-900 whitespace-nowrap">سبيكة 10 جرام (عيار 24)</td>
+            <td class="py-3.5 px-4 text-emerald-700 font-bold whitespace-nowrap">${(buy24k * 10).toFixed(2)} ر.س</td>
+            <td class="py-3.5 px-4 text-gray-600 font-medium whitespace-nowrap">99.9%</td>
+          </tr>
+          <tr class="hover:bg-amber-50/40 transition-colors bg-emerald-50/30">
+            <td class="py-3.5 px-4 font-bold text-gray-900 whitespace-nowrap">أونصة الذهب (31.1 جرام)</td>
+            <td class="py-3.5 px-4 text-emerald-700 font-bold whitespace-nowrap">${ounce.toFixed(2)} ر.س</td>
+            <td class="py-3.5 px-4 text-gray-600 font-medium whitespace-nowrap">99.9%</td>
+          </tr>
+          <tr class="hover:bg-amber-50/40 transition-colors">
+            <td class="py-3.5 px-4 font-bold text-gray-900 whitespace-nowrap">سبيكة 50 جرام (عيار 24)</td>
+            <td class="py-3.5 px-4 text-emerald-700 font-bold whitespace-nowrap">${(buy24k * 50).toFixed(2)} ر.س</td>
+            <td class="py-3.5 px-4 text-gray-600 font-medium whitespace-nowrap">99.9%</td>
+          </tr>
+          <tr class="hover:bg-amber-50/40 transition-colors">
+            <td class="py-3.5 px-4 font-bold text-gray-900 whitespace-nowrap">سبيكة 100 جرام (عيار 24)</td>
+            <td class="py-3.5 px-4 text-emerald-700 font-bold whitespace-nowrap">${(buy24k * 100).toFixed(2)} ر.س</td>
+            <td class="py-3.5 px-4 text-gray-600 font-medium whitespace-nowrap">99.9%</td>
+          </tr>
+          <tr class="hover:bg-amber-50/40 transition-colors bg-emerald-50/30">
+            <td class="py-3.5 px-4 font-bold text-gray-900 whitespace-nowrap">كيلو ذهب (1000 جرام)</td>
+            <td class="py-3.5 px-4 text-emerald-700 font-bold whitespace-nowrap">${kilo.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} ر.س</td>
+            <td class="py-3.5 px-4 text-gray-600 font-medium whitespace-nowrap">99.9%</td>
+          </tr>
+          <tr class="hover:bg-amber-50/40 transition-colors border-t-2 border-gray-200">
+            <td class="py-3.5 px-4 font-bold text-gray-900 whitespace-nowrap">جنيه ذهب سعودي (8 جرام)</td>
+            <td class="py-3.5 px-4 text-emerald-700 font-bold whitespace-nowrap">${pound21k.toFixed(2)} ر.س</td>
+            <td class="py-3.5 px-4 text-gray-600 font-medium whitespace-nowrap">عيار 21</td>
+          </tr>
+        `;
       }
+    } catch (error) {
+      console.error('Error fetching live bullion rates:', error);
     }
-    fetchBullionRates();
+  }
+
+  // Execute immediately
+  fetchLiveBullionRates();
   </script>
 </Layout>

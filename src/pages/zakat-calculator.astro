@@ -9,123 +9,204 @@ const lastUpdated = new Date().toLocaleTimeString('ar-SA', {
 ---
 
 <Layout 
-  title="حاسبة زكاة الذهب بالريال السعودي | حساب النصاب المباشر"
-  description="احسب زكاة الذهب الخاص بك بدقة بناءً على الأسعار المباشرة في السعودية. أداة مجانية لمعرفة بلوغ النصاب (85 جرام عيار 24) وحساب مقدار الزكاة الواجب إخراجها."
+  title="حاسبة زكاة الذهب المباشرة | نصاب الزكاة اليوم في السعودية"
+  description="احسب زكاة ذهبك بدقة وفقاً للأسعار اللحظية للذهب في السعودية. حاسبة زكاة الذهب لعيار 21 و 24 و 18 مع شرح النصاب الشرعي وطريقة الحساب."
 >
   <nav class="max-w-7xl mx-auto px-4 py-4 text-xs md:text-sm text-gray-500" aria-label="Breadcrumb">
     <ol class="flex items-center space-x-2 space-x-reverse">
-      <li><a href="/" class="hover:text-gold-700 font-medium">الرئيسية</a></li>
+      <li><a href="/" class="hover:text-amber-600 font-medium transition">الرئيسية</a></li>
       <li><span class="mx-1">/</span></li>
-      <li class="text-gold-700 font-semibold">حاسبة زكاة الذهب</li>
+      <li class="text-amber-700 font-semibold" aria-current="page">حاسبة زكاة الذهب</li>
     </ol>
   </nav>
 
   <div class="max-w-7xl mx-auto px-4 pb-16">
     <header class="border-b border-gray-200 pb-6 mb-8 text-right">
-      <h1 class="text-2xl md:text-4xl font-extrabold text-gray-900 tracking-tight mb-3">
-        حاسبة زكاة الذهب المباشرة (بالريال السعودي)
+      
+      <!-- Modern Pill Badge for Live Status -->
+      <div class="inline-flex flex-wrap items-center gap-2 px-3 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs md:text-sm font-semibold mb-4 shadow-sm">
+        <span class="relative flex h-2.5 w-2.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500"></span>
+        </span>
+        <span>مرتبطة بالسعر المباشر للذهب عيار 24:</span>
+        <span id="live-24k-badge" class="bg-white px-2 py-0.5 rounded text-amber-900 shadow-sm border border-amber-100 whitespace-nowrap" dir="ltr">جاري التحديث...</span>
+      </div>
+
+      <h1 class="text-2xl md:text-4xl font-extrabold text-gray-900 tracking-tight mb-4">
+        ⚖️ حاسبة زكاة الذهب الذكية
       </h1>
+      
+      <!-- Ali Abdaal Style Highlights -->
       <p class="text-gray-600 text-sm md:text-base max-w-4xl leading-relaxed">
-        تعتمد هذه الحاسبة على السعر اللحظي للذهب في السوق السعودي. النصاب الشرعي لزكاة الذهب هو <strong>85 جراماً من الذهب الخالص (عيار 24)</strong>، ومقدار الزكاة الواجب إخراجها هو ربع العشر (2.5%).
+        أدخل أوزان الذهب التي تملكها في الحقول أدناه. ستقوم الحاسبة تلقائياً بتحويل جميع الأعيرة إلى <span class="bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded font-medium">مكافئ عيار 24</span>، ومقارنتها مع النصاب الشرعي (<span class="bg-emerald-100 text-emerald-900 px-1.5 py-0.5 rounded font-medium">85 جراماً</span>)، وحساب قيمة الزكاة الواجبة بالريال السعودي وفقاً للأسعار اللحظية للشاشة العالمية.
       </p>
     </header>
 
-    <!-- The 12-Column Grid Layout -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
       
       <!-- MAIN CONTENT (8 Columns) -->
       <main class="lg:col-span-8 space-y-10">
-        
-        <!-- AdSense Top Banner Placeholder -->
-        <div class="w-full min-h-[90px] bg-gray-50 flex items-center justify-center border border-gray-200 rounded-lg text-gray-500 text-xs text-center" aria-hidden="true">
-          <!-- Google AdSense Code will inject here -->
-          [مساحة إعلانية أفقية]
+
+        <!-- Calculator Widget -->
+        <section class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+          <div class="bg-gray-50 border-b border-gray-200 p-5 md:p-6 text-center">
+             <h2 class="text-lg md:text-xl font-bold text-gray-800">أدخل أوزان الذهب (بالجرام)</h2>
+             <p class="text-xs text-gray-500 mt-1">اترك الحقل فارغاً إذا لم تكن تملك ذهباً من هذا العيار</p>
+          </div>
+          
+          <div class="p-6 md:p-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              
+              <!-- Input: 24K -->
+              <div>
+                <label for="weight24" class="block text-sm font-bold text-gray-700 mb-2">عيار 24 (سبائك ذهب خالص)</label>
+                <div class="relative">
+                  <input type="number" id="weight24" min="0" placeholder="0" class="block w-full rounded-lg border-gray-300 bg-gray-50 px-4 py-3 text-gray-900 focus:bg-white focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition text-left" dir="ltr">
+                  <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                    <span class="text-gray-400 text-sm font-medium">جرام</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Input: 21K -->
+              <div>
+                <label for="weight21" class="block text-sm font-bold text-gray-700 mb-2">عيار 21 (حلي وجنيهات)</label>
+                <div class="relative">
+                  <input type="number" id="weight21" min="0" placeholder="0" class="block w-full rounded-lg border-gray-300 bg-gray-50 px-4 py-3 text-gray-900 focus:bg-white focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition text-left" dir="ltr">
+                  <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                    <span class="text-gray-400 text-sm font-medium">جرام</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Input: 18K -->
+              <div>
+                <label for="weight18" class="block text-sm font-bold text-gray-700 mb-2">عيار 18 (مشغولات عصرية)</label>
+                <div class="relative">
+                  <input type="number" id="weight18" min="0" placeholder="0" class="block w-full rounded-lg border-gray-300 bg-gray-50 px-4 py-3 text-gray-900 focus:bg-white focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition text-left" dir="ltr">
+                  <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                    <span class="text-gray-400 text-sm font-medium">جرام</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Input: 22K -->
+              <div>
+                <label for="weight22" class="block text-sm font-bold text-gray-700 mb-2">عيار 22 (ذهب خليجي/هندي)</label>
+                <div class="relative">
+                  <input type="number" id="weight22" min="0" placeholder="0" class="block w-full rounded-lg border-gray-300 bg-gray-50 px-4 py-3 text-gray-900 focus:bg-white focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition text-left" dir="ltr">
+                  <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                    <span class="text-gray-400 text-sm font-medium">جرام</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Results Section -->
+            <div class="mt-8 pt-8 border-t border-gray-100">
+              <div id="zakat-result-container" class="rounded-xl p-6 bg-gray-50 border border-gray-200 text-center transition-all duration-300">
+                <p class="text-gray-500 text-sm font-medium mb-1">حالة النصاب</p>
+                <h3 id="nisab-status" class="text-xl font-bold text-gray-800 mb-4">أدخل الأوزان لمعرفة النتيجة</h3>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+                  <div class="bg-white p-4 rounded-lg border border-gray-100 shadow-sm">
+                    <p class="text-xs text-gray-500 mb-1">القيمة الإجمالية للذهب (تقديرية)</p>
+                    <p id="total-value" class="text-xl font-bold text-gray-900" dir="ltr">0.00 <span class="text-sm font-normal text-gray-500">SAR</span></p>
+                  </div>
+                  <div class="bg-white p-4 rounded-lg border border-emerald-100 shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-2 h-full bg-emerald-500"></div>
+                    <p class="text-xs text-gray-500 mb-1">قيمة الزكاة الواجبة (2.5%)</p>
+                    <p id="zakat-due" class="text-2xl font-extrabold text-emerald-600" dir="ltr">0.00 <span class="text-sm font-bold text-emerald-800">SAR</span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- AdSense Content Banner -->
+        <div class="w-full min-h-[120px] bg-gray-50 flex items-center justify-center border border-gray-200 rounded-lg text-gray-500 text-xs text-center" aria-hidden="true">
+          [مساحة إعلانية]
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <!-- Calculator Input Section -->
-          <section class="md:col-span-1 bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h2 class="text-lg font-bold text-gray-900 mb-4 border-b pb-2">أدخل بيانات الذهب</h2>
+        <!-- AEO Thick Content: Rules of Zakat -->
+        <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:p-8">
+          <h2 class="text-xl font-bold text-gray-900 mb-6 border-r-4 border-emerald-500 pr-3">أحكام وشروط زكاة الذهب</h2>
+          
+          <div class="space-y-6">
+            <div>
+              <h3 class="font-bold text-gray-800 mb-2 flex items-center gap-2">
+                <span>1️⃣</span> بلوغ النصاب
+              </h3>
+              <p class="text-sm text-gray-600 leading-relaxed">
+                لا تجب الزكاة في الذهب حتى يبلغ النصاب، وهو <span class="bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded font-bold">85 جراماً من الذهب الخالص (عيار 24)</span>. إذا كان الذهب من عيارات أخرى (مثل 21 أو 18)، يجب حساب وزنه الصافي من الذهب الخالص أولاً. وتقوم هذه الحاسبة بهذه العملية الحسابية تلقائياً نيابة عنك.
+              </p>
+            </div>
             
-            <div class="space-y-4">
-              <div>
-                <label for="zakat-karat" class="block text-sm font-semibold text-gray-700 mb-1">عيار الذهب</label>
-                <select id="zakat-karat" class="w-full bg-gray-50 border border-gray-300 rounded-lg p-3 text-sm focus:ring-2 focus:ring-amber-500">
-                  <option value="24">عيار 24 (ذهب خالص)</option>
-                  <option value="22">عيار 22</option>
-                  <option value="21" selected>عيار 21</option>
-                  <option value="18">عيار 18</option>
-                </select>
-              </div>
+            <hr class="border-gray-100" />
 
-              <div>
-                <label for="zakat-weight" class="block text-sm font-semibold text-gray-700 mb-1">الوزن الكلي (بالجرام)</label>
-                <input type="number" id="zakat-weight" placeholder="مثال: 100" min="0" step="1" class="w-full bg-gray-50 border border-gray-300 rounded-lg p-3 text-sm focus:ring-2 focus:ring-amber-500" />
-              </div>
-            </div>
-          </section>
-
-          <!-- Calculator Output Section -->
-          <section class="md:col-span-2 bg-gray-50 rounded-xl shadow-sm border border-gray-200 p-6 flex flex-col justify-center">
-            <div class="text-center mb-6">
-              <span class="inline-block bg-white border border-gray-200 rounded-full px-4 py-1 text-xs text-gray-500 font-semibold mb-2">
-                السعر المعتمد: الشاشة العالمية (<span class="live-timestamp">{lastUpdated}</span>)
-              </span>
+            <div>
+              <h3 class="font-bold text-gray-800 mb-2 flex items-center gap-2">
+                <span>2️⃣</span> حولان الحول
+              </h3>
+              <p class="text-sm text-gray-600 leading-relaxed">
+                يُشترط لوجوب الزكاة أن يمر على امتلاك الذهب البالغ للنصاب <span class="bg-emerald-100 text-emerald-900 px-1.5 py-0.5 rounded font-medium">سنة هجرية كاملة (حول كامل)</span>. إذا نقص الذهب عن النصاب أثناء الحول، انقطع الحول، ويبدأ حساب حول جديد من يوم بلوغه النصاب مرة أخرى.
+              </p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div class="bg-white p-4 rounded-lg border border-gray-200 text-center">
-                <span class="block text-sm text-gray-500 mb-1">هل بلغ النصاب؟</span>
-                <span id="nisab-status" class="font-bold text-xl text-gray-500">بانتظار الإدخال</span>
-                <p id="nisab-note" class="text-[11px] text-gray-500 mt-1">النصاب = 85 جرام عيار 24</p>
-              </div>
+            <hr class="border-gray-100" />
 
-              <div class="bg-white p-4 rounded-lg border border-gray-200 text-center">
-                <span class="block text-sm text-gray-500 mb-1">القيمة السوقية الحالية</span>
-                <span id="market-value" class="font-bold text-xl text-gray-900">0.00</span>
-                <span class="text-xs text-gray-600">ر.س</span>
-              </div>
+            <div>
+              <h3 class="font-bold text-gray-800 mb-2 flex items-center gap-2">
+                <span>3️⃣</span> المقدار الواجب إخراجه
+              </h3>
+              <p class="text-sm text-gray-600 leading-relaxed">
+                المقدار الواجب إخراجه زكاةً هو <span class="font-bold text-gray-900">ربع العُشر (2.5%)</span> من القيمة الإجمالية للذهب بسعر السوق الحالي (وقت إخراج الزكاة)، وليس بالسعر الذي اشتريت به الذهب سابقاً.
+              </p>
             </div>
+          </div>
+        </section>
 
-            <div class="mt-4 bg-emerald-50 border border-emerald-200 p-6 rounded-lg text-center">
-              <span class="block text-sm text-emerald-800 font-bold mb-1">مقدار الزكاة الواجب إخراجها (2.5%)</span>
-              <span id="zakat-due" class="font-extrabold text-4xl text-emerald-700">0.00</span>
-              <span class="text-sm font-bold text-emerald-800">ريال سعودي</span>
-            </div>
-          </section>
-        </div>
-
-        <!-- AdSense Middle Content Placeholder -->
-        <div class="w-full min-h-[250px] bg-gray-50 flex items-center justify-center border border-gray-200 rounded-lg text-gray-500 text-xs text-center" aria-hidden="true">
-          <!-- Google AdSense Square/Responsive Code will inject here -->
-          [مساحة إعلانية داخل المحتوى]
-        </div>
-
-        <!-- FAQ Accordion Block for Zakat (AEO) -->
-        <section>
-          <h2 class="text-xl font-bold text-gray-900 mb-4 border-r-4 border-amber-500 pr-3">أحكام زكاة الذهب الشائعة</h2>
+        <!-- FAQ Section for Zakat -->
+        <section class="mb-8">
+          <h2 class="text-xl font-bold text-gray-900 mb-4 border-r-4 border-amber-500 pr-3">أسئلة شائعة حول زكاة الذهب</h2>
           <div class="space-y-4">
             <details class="group bg-white border border-gray-200 rounded-lg shadow-sm open:shadow-md transition-all">
               <summary class="flex justify-between items-center font-semibold cursor-pointer list-none p-4 text-gray-900">
-                <span>هل تجب الزكاة في الذهب الملبوس (المعد للزينة)؟</span>
+                <span>هل تجب الزكاة في ذهب الزينة الملبوس؟</span>
                 <span class="transition group-open:rotate-180 text-amber-500">
                   <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><polyline points="6 9 12 15 18 9"/></svg>
                 </span>
               </summary>
               <p class="text-sm text-gray-600 leading-relaxed px-4 pb-4 mt-2 border-t border-gray-100 pt-3">
-                اختلف العلماء في زكاة حلي المرأة المعد للاستعمال والزينة. الأحوط والمفتى به في دار الإفتاء واللجنة الدائمة بالسعودية هو وجوب الزكاة فيه إذا بلغ النصاب (85 جراماً من الذهب الخالص) وحال عليه الحول، وذلك إبراءً للذمة.
+                اختلف العلماء في زكاة حُلي المرأة المُعد للاستعمال والزينة. فذهب بعض أهل العلم إلى عدم وجوب الزكاة فيه إذا كان للاستعمال الشخصي المعتاد. وذهب آخرون (وهو الأحوط والأبرأ للذمة) إلى وجوب الزكاة فيه إذا بلغ النصاب وحال عليه الحول، وذلك لعموم الأدلة الشرعية الموجبة لزكاة الذهب.
               </p>
             </details>
 
             <details class="group bg-white border border-gray-200 rounded-lg shadow-sm open:shadow-md transition-all">
               <summary class="flex justify-between items-center font-semibold cursor-pointer list-none p-4 text-gray-900">
-                <span>كيف يحسب نصاب الذهب لعيار 21 وعيار 18؟</span>
+                <span>هل تُحسب قيمة الفصوص والأحجار الكريمة ضمن زكاة الذهب؟</span>
                 <span class="transition group-open:rotate-180 text-amber-500">
                   <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><polyline points="6 9 12 15 18 9"/></svg>
                 </span>
               </summary>
               <p class="text-sm text-gray-600 leading-relaxed px-4 pb-4 mt-2 border-t border-gray-100 pt-3">
-                النصاب الثابت هو 85 جراماً من عيار 24 (الذهب الخالص). ولمعرفة النصاب للأعيرة الأخرى: يعادل النصاب في عيار 21 حوالي 97.14 جرام، وفي عيار 18 يعادل حوالي 113.33 جرام. الحاسبة بالأعلى تقوم بهذا التحويل تلقائياً.
+                لا، الزكاة تجب في وزن الذهب الصافي فقط. الفصوص والألماس والأحجار الكريمة المركبة في الذهب ليس عليها زكاة ما لم تكن عروض تجارة (مُعدة للبيع والتجارة).
+              </p>
+            </details>
+
+            <details class="group bg-white border border-gray-200 rounded-lg shadow-sm open:shadow-md transition-all">
+              <summary class="flex justify-between items-center font-semibold cursor-pointer list-none p-4 text-gray-900">
+                <span>كيف يتم حساب النصاب للأعيرة المختلفة (21 و 18)؟</span>
+                <span class="transition group-open:rotate-180 text-amber-500">
+                  <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>
+              </summary>
+              <p class="text-sm text-gray-600 leading-relaxed px-4 pb-4 mt-2 border-t border-gray-100 pt-3">
+                يتم ضرب وزن العيار في نسبة نقائه. مثلاً: الذهب عيار 21 يضرب وزنه في (0.875)، وعيار 18 يضرب وزنه في (0.750)، ليتم تحويل الوزن الإجمالي إلى مكافئ عيار 24 النقي، وبناءً عليه يُحدد ما إذا كان المجموع يبلغ 85 جراماً أم لا.
               </p>
             </details>
           </div>
@@ -133,15 +214,15 @@ const lastUpdated = new Date().toLocaleTimeString('ar-SA', {
 
       </main>
 
-      <!-- SIDEBAR COLUMN (4 Columns - Sticky AdSense Placement) -->
+      <!-- SIDEBAR COLUMN (4 Columns) -->
       <aside class="lg:col-span-4 space-y-6 hidden lg:block">
         <div class="sticky top-24">
           
-          <!-- Call to Action Widget -->
+          <!-- CTA to live rates -->
           <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 mb-6 text-center">
-             <h3 class="font-bold text-gray-900 mb-3">تتابع أسعار الذهب؟</h3>
-             <a href="/" class="block w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-4 rounded-lg transition shadow-sm">
-               شاهد أسعار الذهب المباشرة اليوم
+             <h3 class="font-bold text-gray-900 mb-3 text-lg">📊 متابعة الأسعار</h3>
+             <a href="/" class="block w-full bg-gray-900 hover:bg-gray-800 text-white font-bold py-3 px-4 rounded-lg transition shadow-sm">
+               جدول أسعار الذهب اليومية
              </a>
           </div>
 
@@ -149,7 +230,7 @@ const lastUpdated = new Date().toLocaleTimeString('ar-SA', {
           <div class="w-full h-[600px] bg-gray-50 border border-gray-200 flex flex-col items-center justify-center rounded-xl text-gray-500 text-sm">
              <span class="mb-2 text-2xl">🪙</span>
              <span>[مساحة إعلانية عمودية]</span>
-             <span class="text-xs mt-1 text-gray-300">SkyScraper Ad (300x600)</span>
+             <span class="text-xs mt-1 text-gray-400">SkyScraper Ad (300x600)</span>
           </div>
 
         </div>
@@ -159,65 +240,95 @@ const lastUpdated = new Date().toLocaleTimeString('ar-SA', {
   </div>
 
   <script>
-    async function initZakatCalculator() {
+    // Variables to store live rates
+    let currentRate24K = 0;
+    const NISAB_GRAMS = 85;
+
+    // Elements
+    const input24 = document.getElementById('weight24');
+    const input22 = document.getElementById('weight22');
+    const input21 = document.getElementById('weight21');
+    const input18 = document.getElementById('weight18');
+    
+    const nisabStatusEl = document.getElementById('nisab-status');
+    const containerEl = document.getElementById('zakat-result-container');
+    const totalValueEl = document.getElementById('total-value');
+    const zakatDueEl = document.getElementById('zakat-due');
+    const liveBadgeEl = document.getElementById('live-24k-badge');
+
+    // Fetch Live Price for calculation
+    async function initCalculator() {
       try {
-        // Fetch live rates from your actual Cloudflare Worker
         const response = await fetch('https://saudi-gold-api.2019ag138.workers.dev');
         const data = await response.json();
         
-        // Update timestamp
-        document.querySelectorAll('.live-timestamp').forEach(el => el.textContent = data.timestamp);
-
-        // Extract base 24K price (sell price is used for Zakat evaluation)
-        const gram24K = parseFloat(data.rates["24K"].gram_sell);
-
-        function calculateZakat() {
-          const karat = document.getElementById('zakat-karat').value;
-          const weight = parseFloat(document.getElementById('zakat-weight').value) || 0;
-
-          const karatRatios = { '24': 1, '22': 22/24, '21': 21/24, '18': 18/24 };
-          
-          // Calculate the pure 24K equivalent weight
-          const pureGoldWeight = weight * karatRatios[karat];
-          
-          // Calculate total market value based on live 24K price
-          const marketValue = pureGoldWeight * gram24K;
-
-          // Check Nisab (85 grams of pure gold)
-          const reachedNisab = pureGoldWeight >= 85;
-          const zakatDue = reachedNisab ? (marketValue * 0.025) : 0;
-
-          // Update UI
-          const statusEl = document.getElementById('nisab-status');
-          const noteEl = document.getElementById('nisab-note');
-          
-          if (weight === 0) {
-            statusEl.textContent = "بانتظار الإدخال";
-            statusEl.className = "font-bold text-xl text-gray-500";
-            noteEl.textContent = "النصاب = 85 جرام عيار 24";
-          } else if (reachedNisab) {
-            statusEl.textContent = "نعم، بلغ النصاب";
-            statusEl.className = "font-bold text-xl text-emerald-700";
-            noteEl.textContent = `يعادل ${pureGoldWeight.toFixed(2)} جرام عيار 24`;
-          } else {
-            statusEl.textContent = "لا، لم يبلغ النصاب";
-            statusEl.className = "font-bold text-xl text-red-500";
-            noteEl.textContent = `يعادل ${pureGoldWeight.toFixed(2)} جرام فقط`;
-          }
-
-          document.getElementById('market-value').textContent = marketValue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-          document.getElementById('zakat-due').textContent = zakatDue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        if (data.rates && data.rates["24K"]) {
+          currentRate24K = parseFloat(data.rates["24K"].gram_buy);
+          liveBadgeEl.textContent = `${currentRate24K} ر.س / جرام`;
+          calculateZakat(); // Run calculation if inputs already have values
         }
-
-        // Attach event listeners
-        document.getElementById('zakat-karat').addEventListener('change', calculateZakat);
-        document.getElementById('zakat-weight').addEventListener('input', calculateZakat);
-
       } catch (error) {
-        console.error('Error fetching data for Zakat calculator:', error);
+        console.error('Error fetching live gold rates for calculator:', error);
+        liveBadgeEl.textContent = "خطأ في الاتصال";
       }
     }
 
-    initZakatCalculator();
+    // Calculation Logic
+    function calculateZakat() {
+      if (currentRate24K === 0) return; // Wait for API
+
+      const w24 = parseFloat(input24.value) || 0;
+      const w22 = parseFloat(input22.value) || 0;
+      const w21 = parseFloat(input21.value) || 0;
+      const w18 = parseFloat(input18.value) || 0;
+
+      // Convert all to 24K equivalent weight
+      const totalEquivalent24K = (w24 * 1) + (w22 * 0.916) + (w21 * 0.875) + (w18 * 0.750);
+      
+      // Calculate Total Market Value in SAR
+      const totalMarketValue = totalEquivalent24K * currentRate24K;
+      
+      if (totalEquivalent24K === 0) {
+        // Reset UI
+        nisabStatusEl.textContent = "أدخل الأوزان لمعرفة النتيجة";
+        nisabStatusEl.className = "text-xl font-bold text-gray-800 mb-4";
+        containerEl.classList.remove('bg-emerald-50', 'bg-red-50', 'border-emerald-200', 'border-red-200');
+        containerEl.classList.add('bg-gray-50', 'border-gray-200');
+        totalValueEl.innerHTML = `0.00 <span class="text-sm font-normal text-gray-500">SAR</span>`;
+        zakatDueEl.innerHTML = `0.00 <span class="text-sm font-bold text-emerald-800">SAR</span>`;
+        return;
+      }
+
+      totalValueEl.innerHTML = `${totalMarketValue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} <span class="text-sm font-normal text-gray-500">SAR</span>`;
+
+      // Check Nisab
+      if (totalEquivalent24K >= NISAB_GRAMS) {
+        const zakatAmount = totalMarketValue * 0.025; // 2.5%
+        
+        nisabStatusEl.textContent = `✅ لقد بلغ الذهب النصاب (${totalEquivalent24K.toFixed(2)} جرام عيار 24)`;
+        nisabStatusEl.className = "text-xl font-bold text-emerald-700 mb-4";
+        
+        containerEl.classList.remove('bg-gray-50', 'bg-red-50', 'border-gray-200', 'border-red-200');
+        containerEl.classList.add('bg-emerald-50', 'border-emerald-200');
+        
+        zakatDueEl.innerHTML = `${zakatAmount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} <span class="text-sm font-bold text-emerald-800">SAR</span>`;
+      } else {
+        nisabStatusEl.textContent = `❌ لم يبلغ النصاب (${totalEquivalent24K.toFixed(2)} جرام عيار 24 فقط)`;
+        nisabStatusEl.className = "text-xl font-bold text-red-600 mb-4";
+        
+        containerEl.classList.remove('bg-gray-50', 'bg-emerald-50', 'border-gray-200', 'border-emerald-200');
+        containerEl.classList.add('bg-red-50', 'border-red-200');
+        
+        zakatDueEl.innerHTML = `0.00 <span class="text-sm font-bold text-emerald-800">SAR</span>`;
+      }
+    }
+
+    // Event Listeners
+    [input24, input22, input21, input18].forEach(input => {
+      input.addEventListener('input', calculateZakat);
+    });
+
+    // Run on load
+    initCalculator();
   </script>
 </Layout>
