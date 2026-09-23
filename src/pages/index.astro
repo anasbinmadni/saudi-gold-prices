@@ -44,15 +44,24 @@ const bullions = [
 
   <div class="max-w-7xl mx-auto px-4 pb-16">
     <header class="border-b border-gray-200 pb-6 mb-8 text-right">
-      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold mb-3 shadow-sm">
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
-       تحديث فوري من بورصة المعادن: بتوقيت الرياض (<span class="live-timestamp">{lastUpdated}</span>)
+      
+      <!-- FIXED: Modern Pill Badge without brackets, using whitespace-nowrap -->
+      <div class="inline-flex flex-wrap items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs md:text-sm font-semibold mb-4 shadow-sm">
+        <span class="relative flex h-2.5 w-2.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+        </span>
+        <span>تحديث فوري 🇸🇦 بتوقيت الرياض:</span>
+        <span class="live-timestamp bg-white px-2 py-0.5 rounded text-emerald-900 shadow-sm border border-emerald-100 whitespace-nowrap" dir="ltr">{lastUpdated}</span>
       </div>
-      <h1 class="text-2xl md:text-4xl font-extrabold text-gray-900 tracking-tight mb-3">
+
+      <h1 class="text-2xl md:text-4xl font-extrabold text-gray-900 tracking-tight mb-4">
         أسعار الذهب اليوم في السعودية بيع وشراء عيار 21 والسبائك
       </h1>
+      
+      <!-- ADDED: Ali Abdaal Style Highlights -->
       <p class="text-gray-600 text-sm md:text-base max-w-4xl leading-relaxed">
-        جدول التسعير المباشر لأسعار الذهب بالريال السعودي والدولار الأمريكي، محدث لحظياً لأسواق الذهب في الرياض، جدة، والدمام. تشمل البيانات سعر الذهب الخام، وسعر البيع للأفراد، وسعر الشراء بالمصنعية والضريبة.
+        جدول التسعير المباشر لأسعار الذهب بالريال السعودي والدولار الأمريكي، محدث لحظياً لأسواق الذهب في <span class="bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded font-medium">الرياض، جدة، والدمام</span>. تشمل البيانات سعر الذهب الخام، وسعر البيع للأفراد، و<span class="bg-emerald-100 text-emerald-900 px-1.5 py-0.5 rounded font-medium">سعر الشراء بالمصنعية والضريبة</span>.
       </p>
     </header>
 
@@ -70,8 +79,10 @@ const bullions = [
         <!-- Main Live Rates Table -->
         <section class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
           <div class="px-4 md:px-6 py-4 border-b border-gray-200 bg-amber-50/50 flex flex-wrap justify-between items-center gap-2">
-            <h2 class="font-bold text-base md:text-lg text-gray-800">أسعار جرام الذهب في محلات الصاغة السعودية (بدون مصنعية)</h2>
-            <span class="text-xs font-semibold text-amber-900 bg-amber-100 px-2 py-1 rounded">العملة: ريال سعودي (SAR)</span>
+            <h2 class="font-bold text-base md:text-lg text-gray-800 flex items-center gap-2">
+              <span>📊</span> أسعار جرام الذهب في محلات الصاغة (بدون مصنعية)
+            </h2>
+            <span class="text-xs font-semibold text-amber-900 bg-amber-100 px-2 py-1 rounded shadow-sm">العملة: ريال سعودي</span>
           </div>
           <div class="overflow-x-auto">
             <table class="w-full text-right border-collapse min-w-[600px]">
@@ -96,15 +107,17 @@ const bullions = [
             </table>
           </div>
           <div class="px-6 py-3 bg-gray-50 text-xs text-gray-500 border-t border-gray-100 leading-relaxed">
-            * ملحوظة دقيقة للمستهلك: سعر البيع هو السعر الصافي عند بيع ذهبك القديم للمحل بدون مصنعية. سعر الشراء الجديد يضاف عليه مصنعية تتراوح بين 15 إلى 55 ريال للجرام حسب التصميم والماركة.
+            * ملحوظة دقيقة: سعر البيع هو السعر الصافي لبيع ذهبك القديم. سعر الشراء الجديد يضاف عليه <span class="font-semibold text-gray-700">مصنعية (15 - 55 ريال)</span> حسب التصميم.
           </div>
         </section>
 
         <!-- Bullion & Pounds Section -->
         <section class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
           <div class="px-4 md:px-6 py-4 border-b border-gray-200 bg-amber-50/50 flex flex-wrap justify-between items-center gap-2">
-            <h2 class="font-bold text-base md:text-lg text-gray-800">أسعار سبائك الذهب والجنيهات الاستثمارية في السعودية</h2>
-            <span class="text-xs text-gold-700 font-bold bg-gold-50 px-2 py-1 rounded border border-gold-200">معفاة من الضريبة</span>
+            <h2 class="font-bold text-base md:text-lg text-gray-800 flex items-center gap-2">
+              <span>🪙</span> أسعار سبائك الذهب والجنيهات الاستثمارية
+            </h2>
+            <span class="text-xs text-emerald-800 font-bold bg-emerald-100 px-2 py-1 rounded shadow-sm border border-emerald-200">معفاة من الضريبة</span>
           </div>
           <div class="overflow-x-auto">
             <table class="w-full text-right border-collapse min-w-[500px]">
@@ -112,7 +125,7 @@ const bullions = [
                 <tr class="bg-gray-100 text-gray-700 text-xs md:text-sm font-semibold border-b">
                   <th class="py-3 px-4 whitespace-nowrap">الوزن / الصنف</th>
                   <th class="py-3 px-4 whitespace-nowrap">السعر التقديري (SAR)</th>
-                  <th class="py-3 px-4 whitespace-nowrap">موقف ضريبة القيمة المضافة (VAT)</th>
+                  <th class="py-3 px-4 whitespace-nowrap">الضريبة (VAT)</th>
                 </tr>
               </thead>
               <tbody id="bullion-table-body" class="divide-y divide-gray-200 text-sm">
@@ -136,29 +149,29 @@ const bullions = [
           [مساحة إعلانية أفقية داخل المحتوى]
         </div>
 
-        <!-- NEW SEO SECTION: Buyer's Guide (Thick Content) -->
+        <!-- NEW SEO SECTION: Buyer's Guide (Thick Content with Highlights) -->
         <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:p-8">
           <h2 class="text-xl font-bold text-gray-900 mb-6 border-r-4 border-gold-500 pr-3">دليل مشتري الذهب في السوق السعودي</h2>
           
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
               <h3 class="font-bold text-gray-800 mb-3 flex items-center gap-2">
-                <span class="text-gold-600">✦</span> أي عيار تختار؟
+                <span>💡</span> أي عيار تختار؟
               </h3>
-              <ul class="space-y-3 text-sm text-gray-600">
-                <li><strong class="text-gray-900">عيار 24:</strong> الذهب الخالص بنسبة نقاء 99.9%. يُستخدم حصرياً في السبائك الاستثمارية، وهو الخيار الأول لحفظ الثروة لعدم وجود مصنعية مرتفعة أو ضرائب عليه.</li>
-                <li><strong class="text-gray-900">عيار 21:</strong> الأكثر شعبية وتداولاً في السعودية والخليج. يمتاز بلون أصفر غني ومتانة مناسبة لصناعة الحلي والجنيهات الذهبية.</li>
-                <li><strong class="text-gray-900">عيار 18:</strong> المفضل للمشغولات العصرية التي تحتوي على فصوص وأحجار كريمة، حيث تمنحه إضافة المعادن الأخرى صلابة استثنائية.</li>
+              <ul class="space-y-4 text-sm text-gray-600">
+                <li class="leading-relaxed"><span class="bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded font-bold">عيار 24:</span> الذهب الخالص (نقاء 99.9%). الخيار الأول لحفظ الثروة لعدم وجود مصنعية مرتفعة أو ضرائب.</li>
+                <li class="leading-relaxed"><span class="bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded font-bold">عيار 21:</span> الأكثر شعبية في السعودية. يمتاز بلون أصفر غني ومتانة لصناعة الحلي والجنيهات.</li>
+                <li class="leading-relaxed"><span class="bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded font-bold">عيار 18:</span> المفضل للمشغولات العصرية ذات الفصوص، حيث تمنحه إضافة المعادن صلابة استثنائية.</li>
               </ul>
             </div>
             <div>
               <h3 class="font-bold text-gray-800 mb-3 flex items-center gap-2">
-                <span class="text-emerald-600">✓</span> نصائح ذهبية قبل الشراء
+                <span>🛒</span> نصائح ذهبية قبل الشراء
               </h3>
-              <ul class="space-y-3 text-sm text-gray-600">
-                <li><strong class="text-gray-900">الدمغة الرسمية:</strong> تأكد دائماً من وجود ختم العيار (مثل 875 لعيار 21) وعلامة الشركة المصنعة على القطعة.</li>
-                <li><strong class="text-gray-900">الفاتورة الإلكترونية:</strong> اطلب الفاتورة الضريبية الموضحة للوزن الصافي، العيار، قيمة المصنعية، ورقم السجل التجاري للمحل لضمان حقوقك مستقبلاً.</li>
-                <li><strong class="text-gray-900">الأحجار والفصوص:</strong> استفسر من البائع إذا ما كان سيتم خصم وزن الفصوص عند إعادة البيع، حيث تختلف سياسات المحلات في ذلك.</li>
+              <ul class="space-y-4 text-sm text-gray-600">
+                <li class="leading-relaxed"><strong class="text-gray-900">الدمغة الرسمية:</strong> تأكد دائماً من وجود ختم العيار (مثل 875 لعيار 21) وعلامة الشركة المصنعة.</li>
+                <li class="leading-relaxed"><strong class="text-gray-900">الفاتورة الإلكترونية:</strong> اطلب الفاتورة الضريبية الموضحة <span class="bg-emerald-100 text-emerald-900 px-1.5 py-0.5 rounded font-medium">للوزن الصافي، والمصنعية</span> لضمان حقوقك.</li>
+                <li class="leading-relaxed"><strong class="text-gray-900">الأحجار والفصوص:</strong> استفسر من البائع إذا ما كان سيتم خصم وزن الفصوص عند إعادة البيع.</li>
               </ul>
             </div>
           </div>
@@ -167,74 +180,24 @@ const bullions = [
         <!-- Educational & AEO Content Block -->
         <section class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
           <article class="p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
-            <h3 class="font-bold text-lg text-gray-900 mb-3">كيفية حساب مصنعية الذهب في السعودية</h3>
+            <h3 class="font-bold text-lg text-gray-900 mb-3 flex items-center gap-2">
+              <span>🧾</span> حساب مصنعية الذهب
+            </h3>
             <p class="text-sm text-gray-600 leading-relaxed flex-grow">
               تُحسب التكلفة الإجمالية لشراء الذهب الجديد عبر المعادلة: 
-              <strong class="text-gray-800 bg-gray-50 px-3 py-2 rounded-lg block mt-3 mb-3 border border-gray-100 text-center shadow-sm">إجمالي السعر = (الوزن × سعر الجرام) + (الوزن × المصنعية) + 15% ضريبة مصنعية</strong> 
-              السبائك الاستثمارية ذات النقاء 99% معفاة نظاماً من ضريبة القيمة المضافة في المملكة.
+              <strong class="text-amber-900 bg-amber-50 px-3 py-2 rounded-lg block mt-3 mb-3 border border-amber-100 text-center shadow-sm">إجمالي السعر = (الوزن × سعر الجرام) + (الوزن × المصنعية) + 15% ضريبة</strong> 
+              السبائك الاستثمارية ذات النقاء 99% <span class="bg-emerald-100 text-emerald-900 px-1 rounded font-medium">معفاة نظاماً</span> من ضريبة القيمة المضافة.
             </p>
           </article>
 
           <article class="p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
-            <h3 class="font-bold text-lg text-gray-900 mb-3">كيفية حساب نصاب زكاة الذهب بالريال</h3>
+            <h3 class="font-bold text-lg text-gray-900 mb-3 flex items-center gap-2">
+              <span>⚖️</span> نصاب زكاة الذهب
+            </h3>
             <p class="text-sm text-gray-600 leading-relaxed flex-grow">
-              نصاب زكاة الذهب الشرعي هو <strong>85 جراماً من عيار 24</strong> (أو ما يعادل 97.14 جراماً من عيار 21). إذا حال الحول وبلغ الذهب المدخر هذا النصاب، يُخرج ربع العشر (2.5%) من إجمالي قيمته السوقية الحالية كزكاة مال.
+              نصاب زكاة الذهب الشرعي هو <span class="bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded font-bold">85 جراماً من عيار 24</span> (أو ما يعادل 97.14 جرام من عيار 21). إذا حال الحول، يُخرج ربع العشر (2.5%) من إجمالي قيمته السوقية.
             </p>
           </article>
-        </section>
-
-        <!-- FAQ Accordion Block (Expanded for AEO) -->
-        <section class="mb-8">
-          <h2 class="text-xl font-bold text-gray-900 mb-4 border-r-4 border-amber-500 pr-3">الأسئلة الشائعة حول أسعار الذهب في السعودية</h2>
-          <div class="space-y-4">
-            <details class="group bg-white border border-gray-200 rounded-lg shadow-sm open:shadow-md transition-all">
-              <summary class="flex justify-between items-center font-semibold cursor-pointer list-none p-4 text-gray-900">
-                <span>ما الفرق بين سعر بيع الذهب وشراء الذهب في المحلات؟</span>
-                <span class="transition group-open:rotate-180 text-amber-500">
-                  <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><polyline points="6 9 12 15 18 9"/></svg>
-                </span>
-              </summary>
-              <p class="text-sm text-gray-600 leading-relaxed px-4 pb-4 mt-2 border-t border-gray-100 pt-3">
-                سعر الشراء هو المبلغ الذي يدفعه المستهلك للصائغ (ويشمل الخام والمصنعية والضريبة). أما سعر البيع فهو السعر الذي يتقاضاه الزبون عند بيع قطعه القديمة أو السبائك للمحل، ويحسب حصراً على الوزن الصافي للذهب بدون مصنعية.
-              </p>
-            </details>
-
-            <details class="group bg-white border border-gray-200 rounded-lg shadow-sm open:shadow-md transition-all">
-              <summary class="flex justify-between items-center font-semibold cursor-pointer list-none p-4 text-gray-900">
-                <span>هل توجد ضريبة على بيع الذهب المستعمل في السعودية؟</span>
-                <span class="transition group-open:rotate-180 text-amber-500">
-                  <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><polyline points="6 9 12 15 18 9"/></svg>
-                </span>
-              </summary>
-              <p class="text-sm text-gray-600 leading-relaxed px-4 pb-4 mt-2 border-t border-gray-100 pt-3">
-                لا، بيع المستهلك لذهبه المستعمل لمحلات الصاغة لا يخضع لأي ضريبة قيمة مضافة. الضريبة البالغة 15% تُطبق فقط على أجور الصياغة (المصنعية) عند شراء المشغولات الذهبية الجديدة.
-              </p>
-            </details>
-
-            <details class="group bg-white border border-gray-200 rounded-lg shadow-sm open:shadow-md transition-all">
-              <summary class="flex justify-between items-center font-semibold cursor-pointer list-none p-4 text-gray-900">
-                <span>ما هو أفضل عيار لحفظ المال والاستثمار؟</span>
-                <span class="transition group-open:rotate-180 text-amber-500">
-                  <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><polyline points="6 9 12 15 18 9"/></svg>
-                </span>
-              </summary>
-              <p class="text-sm text-gray-600 leading-relaxed px-4 pb-4 mt-2 border-t border-gray-100 pt-3">
-                السبائك عيار 24 هي الخيار الأمثل للاستثمار لأنها لا تفقد قيمتها في المصنعية ومعفاة من الضريبة. يليها الجنيه الذهب عيار 21 لانخفاض تكلفة مصنعيته وسهولة تداوله في السوق.
-              </p>
-            </details>
-
-            <details class="group bg-white border border-gray-200 rounded-lg shadow-sm open:shadow-md transition-all">
-              <summary class="flex justify-between items-center font-semibold cursor-pointer list-none p-4 text-gray-900">
-                <span>لماذا يختلف سعر الذهب بين محل وآخر؟</span>
-                <span class="transition group-open:rotate-180 text-amber-500">
-                  <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><polyline points="6 9 12 15 18 9"/></svg>
-                </span>
-              </summary>
-              <p class="text-sm text-gray-600 leading-relaxed px-4 pb-4 mt-2 border-t border-gray-100 pt-3">
-                سعر الذهب الخام (الشاشة العالمية) ثابت في جميع المحلات. الاختلاف يكمن فقط في "المصنعية" (أجرة التاجر)، والتي تتراوح عادة بين 15 إلى 55 ريالاً للجرام حسب تعقيد التصميم والماركة، بالإضافة لضريبة القيمة المضافة المحسوبة على هذه المصنعية.
-              </p>
-            </details>
-          </div>
         </section>
 
       </main>
@@ -245,7 +208,7 @@ const bullions = [
           
           <!-- Call to Action Widget -->
           <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 mb-6 text-center">
-             <h3 class="font-bold text-gray-900 mb-3">هل بلغ ذهبك النصاب؟</h3>
+             <h3 class="font-bold text-gray-900 mb-3 text-lg">⚖️ هل بلغ ذهبك النصاب؟</h3>
              <a href="/zakat-calculator" class="block w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-4 rounded-lg transition shadow-sm">
                استخدم حاسبة الزكاة مجاناً
              </a>
@@ -280,7 +243,7 @@ const bullions = [
       const timeElements = document.querySelectorAll('.live-timestamp');
       timeElements.forEach(el => el.textContent = saudiTime);
 
-      // 2. Hydrate Main Rates Table (Added whitespace-nowrap for mobile rendering)
+      // 2. Hydrate Main Rates Table
       const tbody = document.getElementById('rates-table-body');
       if (tbody && data.rates) {
         tbody.innerHTML = Object.values(data.rates).map(row => `
@@ -306,7 +269,7 @@ const bullions = [
         `;
       }
 
-      // 3. Hydrate Bullion Table (Added whitespace-nowrap for mobile rendering)
+      // 3. Hydrate Bullion Table
       const bullionBody = document.getElementById('bullion-table-body');
       if (bullionBody && data.rates["24K"] && data.units) {
         const g24 = parseFloat(data.rates["24K"].gram_buy);
