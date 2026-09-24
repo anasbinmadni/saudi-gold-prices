@@ -1,7 +1,10 @@
 ---
+// src/components/BullionPoundsTable.astro
 const bullions = [
   { item: 'جنيه الذهب السعودي (8 جرام عيار 21)', priceSAR: '2,208.80', tax: 'معفى من الضريبة' },
   { item: 'نصف جنيه ذهب (4 جرام عيار 21)', priceSAR: '1,104.40', tax: 'معفى من الضريبة' },
+  { item: 'سبيكة ذهب 1 جرام (عيار 24)', priceSAR: '347.00', tax: 'معفى (نقاء 99%)' },
+  { item: 'سبيكة ذهب 5 جرام (عيار 24)', priceSAR: '1,640.60', tax: 'معفى (نقاء 99%)' },
   { item: 'سبيكة ذهب 10 جرام (عيار 24)', priceSAR: '3,218.10', tax: 'معفى (نقاء 99%)' },
   { item: 'سبيكة ذهب 50 جرام (عيار 24)', priceSAR: '15,853.00', tax: 'معفى (نقاء 99%)' },
   { item: 'سبيكة ذهب 100 جرام (عيار 24)', priceSAR: '31,644.00', tax: 'معفى (نقاء 99%)' },
@@ -9,29 +12,60 @@ const bullions = [
 ];
 ---
 
-<section class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-10 max-w-6xl mx-auto px-0">
-  <div class="px-6 py-4 border-b border-gray-200 bg-amber-50/50 flex justify-between items-center">
-    <h2 class="font-bold text-base md:text-lg text-gray-800">أسعار سبائك الذهب والجنيهات الاستثمارية في السعودية</h2>
-    <span class="text-xs text-gold-700 font-bold">معفاة من الضريبة</span>
+<section class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+  <div class="px-4 md:px-6 py-4 border-b border-gray-200 bg-amber-50/50 flex flex-wrap justify-between items-center gap-2">
+    <h2 class="font-bold text-base md:text-lg text-gray-800 flex items-center gap-2">
+      <span>🪙</span> أسعار سبائك الذهب والجنيهات الاستثمارية
+    </h2>
+    <span class="text-xs text-emerald-800 font-bold bg-emerald-100 px-2 py-1 rounded shadow-sm border border-emerald-200">معفاة من الضريبة</span>
   </div>
   <div class="overflow-x-auto">
-    <table class="w-full text-right border-collapse">
+    <table class="w-full text-right border-collapse min-w-[500px]">
       <thead>
         <tr class="bg-gray-100 text-gray-700 text-xs md:text-sm font-semibold border-b">
-          <th class="py-3 px-4">الوزن / الصنف</th>
-          <th class="py-3 px-4">السعر التقديري (SAR)</th>
-          <th class="py-3 px-4">موقف ضريبة القيمة المضافة (VAT)</th>
+          <th class="py-3 px-4 whitespace-nowrap">الوزن / الصنف</th>
+          <th class="py-3 px-4 whitespace-nowrap">السعر التقديري (SAR)</th>
+          <th class="py-3 px-4 whitespace-nowrap">الضريبة (VAT)</th>
         </tr>
       </thead>
       <tbody id="bullion-table-body" class="divide-y divide-gray-200 text-sm">
         {bullions.map((b) => (
           <tr class="hover:bg-amber-50/40 transition-colors">
-            <td class="py-3.5 px-4 font-bold text-gray-900">{b.item}</td>
-            <td class="py-3.5 px-4 text-gold-700 font-bold">{b.priceSAR} ر.س</td>
-            <td class="py-3.5 px-4 text-emerald-700 font-medium text-xs md:text-sm">{b.tax}</td>
+            <td class="py-3.5 px-4 font-bold text-gray-900 whitespace-nowrap">{b.item}</td>
+            <td class="py-3.5 px-4 text-gold-700 font-bold whitespace-nowrap">{b.priceSAR} ر.س</td>
+            <td class="py-3.5 px-4 text-emerald-700 font-medium text-xs md:text-sm whitespace-nowrap">{b.tax}</td>
           </tr>
         ))}
       </tbody>
     </table>
   </div>
 </section>
+
+<script>
+async function hydrateBullionTable() {
+  try {
+    const response = await fetch('https://saudi-gold-api.2019ag138.workers.dev');
+    const data = await response.json();
+    
+    const bullionBody = document.getElementById('bullion-table-body');
+    if (bullionBody && data.rates["24K"] && data.units) {
+      const g24 = parseFloat(data.rates["24K"].gram_buy);
+      const pound = parseFloat(data.units.pound_21k_sar);
+      
+      bullionBody.innerHTML = `
+        <tr class="hover:bg-amber-50/40 transition-colors"><td class="py-3.5 px-4 font-bold text-gray-900 whitespace-nowrap">جنيه الذهب السعودي (8 جرام عيار 21)</td><td class="py-3.5 px-4 text-gold-700 font-bold whitespace-nowrap">${pound.toFixed(2)} ر.س</td><td class="py-3.5 px-4 text-emerald-700 font-medium text-xs md:text-sm whitespace-nowrap">معفى من الضريبة</td></tr>
+        <tr class="hover:bg-amber-50/40 transition-colors"><td class="py-3.5 px-4 font-bold text-gray-900 whitespace-nowrap">نصف جنيه ذهب (4 جرام عيار 21)</td><td class="py-3.5 px-4 text-gold-700 font-bold whitespace-nowrap">${(pound / 2).toFixed(2)} ر.س</td><td class="py-3.5 px-4 text-emerald-700 font-medium text-xs md:text-sm whitespace-nowrap">معفى من الضريبة</td></tr>
+        <tr class="hover:bg-amber-50/40 transition-colors"><td class="py-3.5 px-4 font-bold text-gray-900 whitespace-nowrap">سبيكة ذهب 1 جرام (عيار 24)</td><td class="py-3.5 px-4 text-gold-700 font-bold whitespace-nowrap">${(g24 * 1).toFixed(2)} ر.س</td><td class="py-3.5 px-4 text-emerald-700 font-medium text-xs md:text-sm whitespace-nowrap">معفى (نقاء 99%)</td></tr>
+        <tr class="hover:bg-amber-50/40 transition-colors"><td class="py-3.5 px-4 font-bold text-gray-900 whitespace-nowrap">سبيكة ذهب 5 جرام (عيار 24)</td><td class="py-3.5 px-4 text-gold-700 font-bold whitespace-nowrap">${(g24 * 5).toFixed(2)} ر.س</td><td class="py-3.5 px-4 text-emerald-700 font-medium text-xs md:text-sm whitespace-nowrap">معفى (نقاء 99%)</td></tr>
+        <tr class="hover:bg-amber-50/40 transition-colors"><td class="py-3.5 px-4 font-bold text-gray-900 whitespace-nowrap">سبيكة ذهب 10 جرام (عيار 24)</td><td class="py-3.5 px-4 text-gold-700 font-bold whitespace-nowrap">${(g24 * 10).toFixed(2)} ر.س</td><td class="py-3.5 px-4 text-emerald-700 font-medium text-xs md:text-sm whitespace-nowrap">معفى (نقاء 99%)</td></tr>
+        <tr class="hover:bg-amber-50/40 transition-colors"><td class="py-3.5 px-4 font-bold text-gray-900 whitespace-nowrap">سبيكة ذهب 50 جرام (عيار 24)</td><td class="py-3.5 px-4 text-gold-700 font-bold whitespace-nowrap">${(g24 * 50).toFixed(2)} ر.س</td><td class="py-3.5 px-4 text-emerald-700 font-medium text-xs md:text-sm whitespace-nowrap">معفى (نقاء 99%)</td></tr>
+        <tr class="hover:bg-amber-50/40 transition-colors"><td class="py-3.5 px-4 font-bold text-gray-900 whitespace-nowrap">سبيكة ذهب 100 جرام (عيار 24)</td><td class="py-3.5 px-4 text-gold-700 font-bold whitespace-nowrap">${(g24 * 100).toFixed(2)} ر.س</td><td class="py-3.5 px-4 text-emerald-700 font-medium text-xs md:text-sm whitespace-nowrap">معفى (نقاء 99%)</td></tr>
+        <tr class="hover:bg-amber-50/40 transition-colors"><td class="py-3.5 px-4 font-bold text-gray-900 whitespace-nowrap">كيلو ذهب (1000 جرام عيار 24)</td><td class="py-3.5 px-4 text-gold-700 font-bold whitespace-nowrap">${data.units.kilo_sar} ر.س</td><td class="py-3.5 px-4 text-emerald-700 font-medium text-xs md:text-sm whitespace-nowrap">معفى (نقاء 99%)</td></tr>
+      `;
+    }
+  } catch (error) {
+    console.error('Error fetching live bullion rates:', error);
+  }
+}
+hydrateBullionTable();
+</script>
