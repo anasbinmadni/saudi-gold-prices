@@ -20,28 +20,32 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <title>{title}</title>
   <meta name="description" content={description} />
   
-  <!-- Preconnect to API Worker (Fixed: removed crossorigin) -->
-  <link rel="preconnect" href="https://saudi-gold-api.2019ag138.workers.dev" />
+  <!-- Added: Favicon SVG -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   
-  <!-- Preconnect to Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-  <!-- Optimized Google Fonts: Weights 500 & 700 only -->
+  <!-- Fixed: Removed extra preconnects to solve PageSpeed warnings -->
+  
+  <!-- Optimized Premium Arabic Font (Cairo) -->
   <link 
     rel="preload" 
     as="style" 
-    href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700&display=swap" 
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;800&display=swap" 
   />
   <link 
     rel="stylesheet" 
-    href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700&display=swap" 
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;800&display=swap" 
     media="print" 
     onload="this.media='all'" 
   />
   <noscript>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;800&display=swap" />
   </noscript>
+
+  <style is:global>
+    html, body {
+      font-family: 'Cairo', sans-serif !important;
+    }
+  </style>
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
@@ -51,7 +55,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <meta property="og:url" content={canonicalURL} />
   <meta property="og:site_name" content="أسعار الذهب مباشر بالسعودية" />
 
-  <!-- Smart Non-Blocking Loader for GA4 & AdSense -->
+  <!-- Smart Non-Blocking Loader for GA4 & AdSense (Optimized to 5 seconds) -->
   <script is:inline>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -76,11 +80,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       document.head.appendChild(adsScript);
     }
 
-    // Trigger on first human interaction or after 3.5s idle window
+    // Trigger on first human interaction or after 5s idle window
     ['touchstart', 'scroll', 'mousemove', 'keydown'].forEach(event => {
       window.addEventListener(event, loadThirdPartyScripts, { once: true, passive: true });
     });
-    setTimeout(loadThirdPartyScripts, 3500);
+    setTimeout(loadThirdPartyScripts, 5000);
   </script>
 
   <!-- Structured Data -->
@@ -115,7 +119,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     ]
   })} />
 </head>
-<body class="bg-gray-50 text-gray-900 font-arabic antialiased min-h-screen flex flex-col">
+<body class="bg-gray-50 text-gray-900 antialiased min-h-screen flex flex-col">
   <SiteHeader />
   <div class="flex-grow">
     <slot />
