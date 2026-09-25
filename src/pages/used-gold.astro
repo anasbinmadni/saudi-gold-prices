@@ -1,11 +1,26 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const lastUpdated = new Date().toLocaleTimeString('ar-SA', { 
-  hour: '2-digit', 
-  minute: '2-digit', 
-  timeZone: 'Asia/Riyadh' 
-});
+// Naye SEO & UI Components
+import Breadcrumb from '../components/Breadcrumb.astro';
+import LiveTimeBadge from '../components/LiveTimeBadge.astro';
+import AdBanner from '../components/AdBanner.astro';
+
+// AEO-Optimized FAQ Data (Will be passed to Layout for JSON-LD Schema)
+const faqData = [
+  {
+    question: "هل يخصم المحل ضريبة القيمة المضافة عند بيعي للذهب؟",
+    answer: "لا، بيع المستهلك (الفرد) للذهب المستعمل إلى المحلات التجارية يُعد خارج نطاق ضريبة القيمة المضافة. يجب أن تستلم قيمة وزن الذهب مضروباً في سعر الشاشة الصافي دون أي استقطاعات ضريبية."
+  },
+  {
+    question: "هل أحتاج فاتورة الشراء القديمة لبيع الذهب؟",
+    answer: "نعم، يُنصح بشدة إحضار الفاتورة الأصلية. الفاتورة تُثبت ملكيتك للقطعة وتحميك، كما أنها توضح وزن الذهب الصافي ووزن الفصوص، مما يمنع التاجر من المبالغة في خصم الأوزان."
+  },
+  {
+    question: "متى يكون أفضل وقت لبيع الذهب المستعمل؟",
+    answer: "أفضل وقت للبيع هو عند تسجيل سعر أونصة الذهب مستويات قياسية مرتفعة بالدولار عالمياً. بما أن الريال السعودي مربوط بالدولار، فإن أي ارتفاع عالمي ينعكس فوراً على سعر الجرام الذي سيشتريه منك التاجر."
+  }
+];
 
 // Fallback static data for Used Gold (Scrap)
 const usedGoldRates = [
@@ -19,35 +34,28 @@ const usedGoldRates = [
 <Layout 
   title="سعر بيع الذهب المستعمل اليوم في السعودية | كسر الذهب"
   description="تعرف على أسعار بيع الذهب المستعمل (الكسر) لمحلات الصاغة في السعودية اليوم. جدول محدث لحظياً لعيار 21 و 18 و 24 مع نصائح لتجنب الخسارة عند البيع."
+  faq={faqData}
 >
-  <nav class="max-w-7xl mx-auto px-4 py-4 text-xs md:text-sm text-gray-500" aria-label="Breadcrumb">
-    <ol class="flex items-center space-x-2 space-x-reverse">
-      <li><a href="/" class="hover:text-amber-600 font-medium transition">الرئيسية</a></li>
-      <li><span class="mx-1">/</span></li>
-      <li class="text-amber-700 font-semibold" aria-current="page">سعر بيع الذهب المستعمل</li>
-    </ol>
-  </nav>
+  <Breadcrumb currentPage="سعر بيع الذهب المستعمل" />
 
   <div class="max-w-7xl mx-auto px-4 pb-16">
     <header class="border-b border-gray-200 pb-6 mb-8 text-right">
       
-      <!-- Modern Pill Badge for Live Status -->
-      <div class="inline-flex flex-wrap items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs md:text-sm font-semibold mb-4 shadow-sm">
-        <span class="relative flex h-2.5 w-2.5">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-        </span>
-        <span>تحديث فوري 🇸🇦 لسعر الكسر:</span>
-        <span class="live-timestamp bg-white px-2 py-0.5 rounded text-emerald-900 shadow-sm border border-emerald-100 whitespace-nowrap" dir="ltr">{lastUpdated}</span>
-      </div>
+      <LiveTimeBadge text="تحديث فوري 🇸🇦 لسعر الكسر:" />
 
       <h1 class="text-2xl md:text-4xl font-extrabold text-gray-900 tracking-tight mb-4">
         سعر بيع الذهب المستعمل (الكسر) لمحلات الصاغة
       </h1>
       
       <!-- Ali Abdaal Style Highlights -->
-      <p class="text-gray-600 text-sm md:text-base max-w-4xl leading-relaxed">
+      <p class="text-gray-600 text-sm md:text-base max-w-4xl leading-relaxed mb-3">
         عند رغبتك في بيع ذهبك القديم للمحل، يتم حساب السعر بناءً على <span class="bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded font-medium">الوزن الصافي للذهب (بدون فصوص)</span> مضروباً في سعر الشراء اللحظي للشاشة العالمية. بيع الذهب المستعمل للأفراد <span class="bg-emerald-100 text-emerald-900 px-1.5 py-0.5 rounded font-medium">لا يخضع لضريبة القيمة المضافة (VAT)</span>.
+      </p>
+
+      <!-- Source Citation (E-E-A-T) -->
+      <p class="text-xs text-gray-500 flex items-center gap-1">
+        <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <span>بيانات أسعار الاسترداد تعتمد حصرياً على الشاشة العالمية (Global Spot Price).</span>
       </p>
     </header>
 
@@ -56,10 +64,7 @@ const usedGoldRates = [
       <!-- MAIN CONTENT (8 Columns) -->
       <main class="lg:col-span-8 space-y-10">
         
-        <!-- AdSense Top Banner Placeholder -->
-        <div class="w-full min-h-[90px] bg-gray-50 flex items-center justify-center border border-gray-200 rounded-lg text-gray-500 text-xs text-center" aria-hidden="true">
-          [مساحة إعلانية]
-        </div>
+        <AdBanner />
 
         <!-- Used Gold Live Rates Table -->
         <section class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
@@ -90,13 +95,17 @@ const usedGoldRates = [
             </table>
           </div>
           <div class="px-6 py-3 bg-gray-50 text-xs text-gray-500 border-t border-gray-100 leading-relaxed">
-            * تنبيه: السعر أعلاه يمثل قيمة الذهب الصافي فقط. تفقد المشغولات الذهبية قيمة "المصنعية" (أجرة الصياغة) التي دُفعت عند شرائها جديدة.
+            * تنبيه: السعر أعلاه يمثل قيمة الذهب الصافي فقط (سعر الشاشة). تفقد المشغولات الذهبية قيمة "المصنعية" (أجرة الصياغة) التي دُفعت عند شرائها جديدة، حيث يشتري التاجر الذهب كخام لصهرِهِ مجدداً.
           </div>
         </section>
 
-        <!-- AdSense Middle Content Placeholder -->
-        <div class="w-full min-h-[250px] bg-gray-50 flex items-center justify-center border border-gray-200 rounded-lg text-gray-500 text-xs text-center" aria-hidden="true">
-          [مساحة إعلانية أفقية داخل المحتوى]
+        <AdBanner />
+
+        <!-- Image Placeholder for SEO -->
+        <div class="w-full h-48 md:h-64 bg-gray-100 rounded-lg mb-4 border border-gray-200 flex items-center justify-center text-gray-400 text-sm overflow-hidden relative">
+           <!-- المستقبلي: أضف صورة حقيقية هنا لميزان الذهب وقطع ذهب مستعملة -->
+           <img src="/images/saudi-scrap-gold-scale.jpg" alt="وزن وبيع الذهب المستعمل والكسر في محلات السعودية" class="w-full h-full object-cover absolute inset-0 opacity-0 transition-opacity duration-300" onload="this.classList.remove('opacity-0')" onerror="this.style.display='none'" />
+           <span class="z-10">[مساحة لصورة توضيحية لميزان الذهب أو كسر الذهب]</span>
         </div>
 
         <!-- AEO SEO Content Block (Ali Abdaal Style) -->
@@ -109,7 +118,7 @@ const usedGoldRates = [
                 <span>📉</span> خسارة المصنعية أمر حتمي
               </h3>
               <p class="text-sm text-gray-600 leading-relaxed">
-                عند شرائك للذهب الجديد، فإنك تدفع ثمن (الذهب الخام + أجرة وتعب الصائغ). أما عند البيع، فإن الصائغ يشتري منك <span class="bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded font-bold">الذهب الخام فقط</span> تمهيداً لصهره وإعادة تشكيله. لذلك لا يتم تعويضك عن قيمة المصنعية القديمة.
+                عند شرائك للذهب الجديد، فإنك تدفع ثمن (الذهب الخام + أجرة وتعب الصائغ). أما عند البيع، فإن الصائغ يشتري منك <span class="bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded font-bold">الذهب الخام فقط</span> تمهيداً لصهره وإعادة تشكيله. لذلك لا يتم تعويضك أبداً عن قيمة المصنعية القديمة.
               </p>
             </div>
             <div>
@@ -117,51 +126,40 @@ const usedGoldRates = [
                 <span>💎</span> مشكلة الفصوص والأحجار
               </h3>
               <p class="text-sm text-gray-600 leading-relaxed">
-                معظم محلات الذهب في السعودية ستقوم بفك الفصوص والأحجار الكريمة (الزيركون) من المشغولات قبل وزنها، أو <span class="bg-emerald-100 text-emerald-900 px-1.5 py-0.5 rounded font-medium">خصم وزنها التقديري</span>. يُنصح بشراء الذهب الصافي (بدون فصوص) إذا كان الغرض هو الاستثمار.
+                معظم محلات الذهب في السعودية ستقوم بفك الفصوص والأحجار الكريمة (الزيركون أو الكريستال) من المشغولات قبل وزنها، أو <span class="bg-emerald-100 text-emerald-900 px-1.5 py-0.5 rounded font-medium">خصم وزنها التقديري</span>. يُنصح بشراء الذهب الصافي (بدون فصوص) أساساً إذا كان الغرض هو الاستثمار والبيع لاحقاً.
               </p>
             </div>
           </div>
+        </section>
+
+        <!-- New Thick Content: Practical Steps -->
+        <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:p-8">
+          <h2 class="text-lg font-bold text-gray-900 mb-4 border-r-4 border-emerald-500 pr-3">خطوات عملية قبل الذهاب لبيع ذهبك المستعمل</h2>
+          <ol class="space-y-4 text-sm text-gray-600 list-decimal list-inside">
+            <li class="leading-relaxed"><strong class="text-gray-900">افرز الأعيرة:</strong> قم بفصل المشغولات حسب العيار (عيار 18 وحده، وعيار 21 وحده) حتى لا يتم حساب المجموع كله على العيار الأقل بالخطأ.</li>
+            <li class="leading-relaxed"><strong class="text-gray-900">اعرف الوزن الصافي:</strong> حاول وزن الذهب في المنزل بميزان دقيق (أو ميزان مطبخ حساس) ليكون لديك تصور مبدئي عن الوزن الصافي بعد استبعاد الأحجار والفصوص.</li>
+            <li class="leading-relaxed"><strong class="text-gray-900">تحقق من سعر الشاشة قبل الدخول للمحل:</strong> افتح هذه الصفحة داخل المحل، وتأكد أن التاجر يشتري منك بسعر الجرام المحدث الموضح في الجدول أعلاه وليس بسعر أقل بكثير.</li>
+            <li class="leading-relaxed"><strong class="text-gray-900">تجنب أوقات تذبذب السوق العنيف:</strong> في أوقات الأخبار الاقتصادية الكبرى، قد يوقف التجار الشراء أو يعرضون سعراً أقل لحماية أنفسهم من تقلبات الأسعار.</li>
+          </ol>
         </section>
 
         <!-- Specific FAQ for Used Gold -->
         <section class="mb-8">
           <h2 class="text-xl font-bold text-gray-900 mb-4 border-r-4 border-amber-500 pr-3">أسئلة وإجابات حول بيع الذهب المستعمل</h2>
           <div class="space-y-4">
-            <details class="group bg-white border border-gray-200 rounded-lg shadow-sm open:shadow-md transition-all">
-              <summary class="flex justify-between items-center font-semibold cursor-pointer list-none p-4 text-gray-900">
-                <span>هل يخصم المحل ضريبة القيمة المضافة عند بيعي للذهب؟</span>
-                <span class="transition group-open:rotate-180 text-amber-500">
-                  <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><polyline points="6 9 12 15 18 9"/></svg>
-                </span>
-              </summary>
-              <p class="text-sm text-gray-600 leading-relaxed px-4 pb-4 mt-2 border-t border-gray-100 pt-3">
-                لا، بيع المستهلك (الفرد) للذهب المستعمل إلى المحلات التجارية يُعد خارج نطاق ضريبة القيمة المضافة. يجب أن تستلم قيمة وزن الذهب مضروباً في سعر الشاشة الصافي دون أي استقطاعات ضريبية.
-              </p>
-            </details>
-
-            <details class="group bg-white border border-gray-200 rounded-lg shadow-sm open:shadow-md transition-all">
-              <summary class="flex justify-between items-center font-semibold cursor-pointer list-none p-4 text-gray-900">
-                <span>هل أحتاج فاتورة الشراء القديمة لبيع الذهب؟</span>
-                <span class="transition group-open:rotate-180 text-amber-500">
-                  <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><polyline points="6 9 12 15 18 9"/></svg>
-                </span>
-              </summary>
-              <p class="text-sm text-gray-600 leading-relaxed px-4 pb-4 mt-2 border-t border-gray-100 pt-3">
-                نعم، يُنصح وبشدة إحضار الفاتورة الأصلية. الفاتورة تُثبت ملكيتك للقطعة وتحميك من المساءلة، كما أنها تحتوي على تفاصيل وزن الذهب ووزن الفصوص بدقة، مما يمنع التاجر من المبالغة في خصم وزن الفصوص عند التقييم.
-              </p>
-            </details>
-
-            <details class="group bg-white border border-gray-200 rounded-lg shadow-sm open:shadow-md transition-all">
-              <summary class="flex justify-between items-center font-semibold cursor-pointer list-none p-4 text-gray-900">
-                <span>متى يكون أفضل وقت لبيع الذهب المستعمل؟</span>
-                <span class="transition group-open:rotate-180 text-amber-500">
-                  <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><polyline points="6 9 12 15 18 9"/></svg>
-                </span>
-              </summary>
-              <p class="text-sm text-gray-600 leading-relaxed px-4 pb-4 mt-2 border-t border-gray-100 pt-3">
-                راقب الشاشة العالمية (الموضحة في موقعنا). أفضل وقت للبيع هو عند ارتفاع السعر العالمي للأونصة بالدولار. بما أن الريال السعودي مربوط بالدولار، فإن أي ارتفاع عالمي ينعكس فوراً على سعر الجرام في السوق المحلي.
-              </p>
-            </details>
+            {faqData.map((faq) => (
+              <details class="group bg-white border border-gray-200 rounded-lg shadow-sm open:shadow-md transition-all">
+                <summary class="flex justify-between items-center font-semibold cursor-pointer list-none p-4 text-gray-900">
+                  <span>{faq.question}</span>
+                  <span class="transition group-open:rotate-180 text-amber-500">
+                    <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><polyline points="6 9 12 15 18 9"/></svg>
+                  </span>
+                </summary>
+                <p class="text-sm text-gray-600 leading-relaxed px-4 pb-4 mt-2 border-t border-gray-100 pt-3">
+                  {faq.answer}
+                </p>
+              </details>
+            ))}
           </div>
         </section>
 
@@ -179,12 +177,7 @@ const usedGoldRates = [
              </a>
           </div>
 
-          <!-- Vertical AdSense Placeholder -->
-          <div class="w-full h-[600px] bg-gray-50 border border-gray-200 flex flex-col items-center justify-center rounded-xl text-gray-500 text-sm">
-             <span class="mb-2 text-2xl">🪙</span>
-             <span>[مساحة إعلانية عمودية]</span>
-             <span class="text-xs mt-1 text-gray-400">SkyScraper Ad (300x600)</span>
-          </div>
+          <AdBanner variant="vertical" />
 
         </div>
       </aside>
@@ -198,14 +191,7 @@ const usedGoldRates = [
       const response = await fetch('https://saudi-gold-api.2019ag138.workers.dev');
       const data = await response.json();
       
-      // Update Time Badge
-      const saudiTime = new Date().toLocaleTimeString('ar-SA', { 
-        hour: '2-digit', 
-        minute: '2-digit', 
-        timeZone: 'Asia/Riyadh' 
-      });
-      const timeElements = document.querySelectorAll('.live-timestamp');
-      timeElements.forEach(el => el.textContent = saudiTime);
+      // Note: Time badge is now handled by the LiveTimeBadge component automatically.
 
       // Hydrate Used Gold Specific Table (We use 'gram_buy' which is the price shop buys AT)
       const tbody = document.getElementById('used-gold-table-body');

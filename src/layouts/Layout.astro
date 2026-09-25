@@ -5,10 +5,76 @@ import SiteFooter from '../components/SiteFooter.astro';
 interface Props {
   title: string;
   description: string;
+  // Naye SEO Props (Claude ki recommendations ke mutabiq)
+  faq?: { question: string; answer: string }[];
+  modifiedDate?: string;
 }
 
-const { title, description } = Astro.props;
+const { 
+  title, 
+  description, 
+  faq, 
+  // Agar manually date na di jaye, to build time ko modified date manega
+  modifiedDate = new Date().toISOString() 
+} = Astro.props;
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// Dynamic Schema Builder
+const schemaGraph: any[] = [
+  // 1. WebPage Schema (For dateModified / Freshness)
+  {
+    "@type": "WebPage",
+    "@id": canonicalURL,
+    "url": canonicalURL,
+    "name": title,
+    "description": description,
+    "dateModified": modifiedDate,
+    "inLanguage": "ar-SA"
+  },
+  // 2. BreadcrumbList Schema
+  {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "الرئيسية",
+        "item": Astro.site
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": title,
+        "item": canonicalURL
+      }
+    ]
+  },
+  // 3. FinancialProduct Schema
+  {
+    "@type": "FinancialProduct",
+    "name": "سعر الذهب عيار 21 اليوم في السعودية",
+    "description": "تحديث مباشر لأسعار الذهب عيار 21 و24 بيع وشراء في محلات الذهب السعودية بالريال والدولار",
+    "feesAndCommissionsSpecification": "شامل الضريبة وبدون مصنعية",
+    "category": "Precious Metals",
+    "currency": "SAR"
+  }
+];
+
+// 4. FAQ Schema (Sirf us page par add hoga jis mein FAQ pass kiye jayenge)
+if (faq && faq.length > 0) {
+  schemaGraph.push({
+    "@type": "FAQPage",
+    "mainEntity": faq.map(item => ({
+      "@type": "Question",
+      "name": item.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.answer
+      }
+    }))
+  });
+}
 ---
 
 <!DOCTYPE html>
@@ -22,8 +88,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   
   <!-- Added: Favicon SVG -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  
-  <!-- Fixed: Removed extra preconnects to solve PageSpeed warnings -->
   
   <!-- Optimized Premium Arabic Font (Cairo) -->
   <link 
@@ -87,36 +151,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     setTimeout(loadThirdPartyScripts, 5000);
   </script>
 
-  <!-- Structured Data -->
+  <!-- Structured Data JSON-LD (Dynamically Injected) -->
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "الرئيسية",
-            "item": Astro.site
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "أسعار الذهب اليوم في السعودية",
-            "item": canonicalURL
-          }
-        ]
-      },
-      {
-        "@type": "FinancialProduct",
-        "name": "سعر الذهب عيار 21 اليوم في السعودية",
-        "description": "تحديث مباشر لأسعار الذهب عيار 21 و24 بيع وشراء في محلات الذهب السعودية بالريال والدولار",
-        "feesAndCommissionsSpecification": "شامل الضريبة وبدون مصنعية",
-        "category": "Precious Metals",
-        "currency": "SAR"
-      }
-    ]
+    "@graph": schemaGraph
   })} />
 </head>
 <body class="bg-gray-50 text-gray-900 antialiased min-h-screen flex flex-col">

@@ -1,37 +1,61 @@
 ---
 const year = new Date().getFullYear();
 ---
-<footer class="bg-gray-900 text-gray-300 py-10 mt-16 border-t-4 border-amber-500">
-  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
-    <div>
-      <h3 class="text-white font-bold text-lg mb-4 flex items-center gap-2">
-        <span>🪙</span> أسعار الذهب السعودية
+
+<footer class="bg-gray-900 text-gray-300 py-12 mt-16 border-t-4 border-amber-500">
+  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-12 gap-10">
+    
+    <!-- Brand & E-E-A-T Section -->
+    <div class="md:col-span-5">
+      <h3 class="text-white font-bold text-xl mb-4 flex items-center gap-2">
+        <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        أسعار الذهب السعودية
       </h3>
-      <p class="text-sm leading-relaxed text-gray-400">
-        منصة متخصصة في عرض وتحديث أسعار الذهب اللحظية في المملكة العربية السعودية بالريال السعودي والدولار، بالإضافة إلى أدوات حاسبة الزكاة والمصنعية.
+      <p class="text-sm leading-relaxed text-gray-400 mb-5 pr-1">
+        منصة تقنية مستقلة تقدم أسعار الذهب المباشرة في المملكة العربية السعودية. محدثة لحظياً من الشاشة العالمية مع تطبيق لوائح هيئة الزكاة والضريبة والجمارك (ZATCA).
       </p>
+      <div class="inline-block bg-gray-800 px-4 py-2 rounded-lg border border-gray-700 shadow-sm">
+        <p class="text-xs text-gray-400 font-medium m-0">
+          تم التطوير بواسطة <strong class="text-white font-bold tracking-wide">Abraaj Growth Labs</strong>
+        </p>
+      </div>
     </div>
-    <div>
-      <h3 class="text-white font-bold text-lg mb-4">روابط سريعة</h3>
-      <ul class="space-y-2 text-sm">
-        <li><a href="/" class="hover:text-amber-500 transition">أسعار الذهب المباشرة</a></li>
-        <li><a href="/bullion" class="hover:text-amber-500 transition">السبائك والجنيهات</a></li>
-        <li><a href="/used-gold" class="hover:text-amber-500 transition">سعر بيع الذهب (الكسر)</a></li>
-        <li><a href="/zakat-calculator" class="hover:text-amber-500 transition">حاسبة زكاة الذهب</a></li>
+
+    <!-- Quick Links -->
+    <div class="md:col-span-3 md:pr-4">
+      <h3 class="text-white font-bold text-lg mb-5 border-r-2 border-amber-500 pr-2">أقسام الموقع</h3>
+      <ul class="space-y-3 text-sm">
+        <li><a href="/" class="hover:text-amber-500 transition flex items-center gap-2"><span class="text-gray-600 text-xs">■</span> أسعار الذهب المباشرة</a></li>
+        <li><a href="/22-karat" class="hover:text-amber-500 transition flex items-center gap-2"><span class="text-gray-600 text-xs">■</span> سعر الذهب عيار 22 (الخليجي)</a></li>
+        <li><a href="/18-karat" class="hover:text-amber-500 transition flex items-center gap-2"><span class="text-gray-600 text-xs">■</span> سعر الذهب عيار 18 (المشغولات)</a></li>
+        <li><a href="/bullion" class="hover:text-amber-500 transition flex items-center gap-2"><span class="text-gray-600 text-xs">■</span> أسعار السبائك والجنيهات</a></li>
+        <li><a href="/used-gold" class="hover:text-amber-500 transition flex items-center gap-2"><span class="text-gray-600 text-xs">■</span> سعر بيع الذهب (الكسر)</a></li>
+        <li><a href="/zakat-calculator" class="hover:text-amber-500 transition flex items-center gap-2"><span class="text-gray-600 text-xs">■</span> حاسبة زكاة الذهب</a></li>
       </ul>
     </div>
-    <div>
-      <h3 class="text-white font-bold text-lg mb-4">روابط هامة (AdSense)</h3>
-      <ul class="space-y-2 text-sm text-gray-400">
-        <li><a href="/privacy-policy" class="hover:text-white transition">سياسة الخصوصية</a></li>
-        <li><a href="/disclaimer" class="hover:text-white transition">إخلاء المسؤولية</a></li>
-        <li><a href="/contact" class="hover:text-white transition">اتصل بنا</a></li>
+
+    <!-- Legal & Trust Links -->
+    <div class="md:col-span-4 md:pr-4">
+      <h3 class="text-white font-bold text-lg mb-5 border-r-2 border-amber-500 pr-2">معلومات هامة (الشفافية)</h3>
+      <ul class="space-y-3 text-sm text-gray-400">
+        <li><a href="/about" class="hover:text-white transition flex items-center gap-2"><span class="text-amber-500 font-bold">✓</span> من نحن (عن المنصة)</a></li>
+        <li><a href="/contact" class="hover:text-white transition flex items-center gap-2"><span class="text-amber-500 font-bold">✓</span> تواصل معنا والدعم الفني</a></li>
+        <li><a href="/privacy-policy" class="hover:text-white transition flex items-center gap-2"><span class="text-gray-600 text-xs">■</span> سياسة الخصوصية</a></li>
+        <li><a href="/disclaimer" class="hover:text-white transition flex items-center gap-2"><span class="text-gray-600 text-xs">■</span> إخلاء المسؤولية</a></li>
       </ul>
     </div>
+
   </div>
-  <div class="max-w-7xl mx-auto px-4 mt-8 pt-8 border-t border-gray-800 text-center text-xs text-gray-400 leading-relaxed">
-    إخلاء مسؤولية: الأسعار المعروضة استرشادية بناءً على الشاشة العالمية، وقد تختلف قليلاً في محلات الصاغة والمجوهرات حسب سياسة كل شركة.<br>
-    جميع البيانات مقدمة لأغراض معلوماتية فقط ولا تعتبر استشارة مالية.<br><br>
-    &copy; {year} أسعار الذهب السعودية. جميع الحقوق محفوظة.
+
+  <!-- Copyright & Disclaimer Bottom -->
+  <div class="max-w-7xl mx-auto px-4 mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-gray-500 leading-relaxed">
+    <div class="text-center md:text-right max-w-3xl">
+      <strong class="text-gray-400">إخلاء مسؤولية:</strong> الأسعار المعروضة هي مؤشر لأسعار السوق (الذهب الخام) بناءً على الشاشة العالمية، ولا تشمل أجور المصنعية. الموقع أداة تقنية لعرض البيانات ولا يبيع أو يشتري الذهب، كما أن البيانات مقدمة لأغراض معلوماتية فقط وليست استشارة مالية.
+    </div>
+    <div class="text-center md:text-left whitespace-nowrap bg-gray-900 px-2 py-1 rounded">
+      &copy; {year} <span class="font-bold text-gray-300">Abraaj Growth Labs</span>.<br> جميع الحقوق محفوظة.
+    </div>
   </div>
 </footer>

@@ -1,11 +1,22 @@
 # Title
+Saudi Gold Rates (saudigoldrates.com) - Live Gold Prices & FinTech Tools
 
-Saudi Gold Rates (saudigoldrates.com) provides daily live gold prices in Saudi Arabia.
+# Description
+Saudi Gold Rates is an independent financial technology platform operated by Abraaj Growth Labs. It provides real-time, API-driven gold prices in Saudi Arabia (SAR) based on the Global Spot Market. The platform integrates ZATCA (Zakat, Tax and Customs Authority) tax rules for precise consumer pricing, bullion investments, scrap gold valuation, and an automated Zakat calculator.
 
-## Links
-
-- [Homepage](https://saudigoldrates.com/)
+## Market Data & Rates
+- [Homepage / Live Rates](https://saudigoldrates.com/)
+- [24-Karat & Bullion Rates](https://saudigoldrates.com/bullion)
+- [22-Karat Gold Rates (Gulf/Indian)](https://saudigoldrates.com/22-karat)
 - [21-Karat Gold Rates](https://saudigoldrates.com/21-karat)
-- [Bullion & Coins](https://saudigoldrates.com/bullion)
-- [Used Gold Rates](https://saudigoldrates.com/used-gold)
-- [Zakat Calculator](https://saudigoldrates.com/zakat-calculator)
+- [18-Karat Gold Rates](https://saudigoldrates.com/18-karat)
+- [Used Gold (Scrap) Rates](https://saudigoldrates.com/used-gold)
+
+## Financial Tools
+- [Smart Zakat Calculator](https://saudigoldrates.com/zakat-calculator)
+
+## Transparency & E-E-A-T
+- [About Us & Methodology](https://saudigoldrates.com/about)
+- [Contact & Support](https://saudigoldrates.com/contact)
+- [Privacy Policy](https://saudigoldrates.com/privacy-policy)
+- [Disclaimer](https://saudigoldrates.com/disclaimer)

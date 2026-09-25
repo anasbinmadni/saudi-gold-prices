@@ -1,35 +1,44 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const lastUpdated = new Date().toLocaleTimeString('ar-SA', { 
-  hour: '2-digit', 
-  minute: '2-digit', 
-  timeZone: 'Asia/Riyadh' 
-});
+// Naye SEO & UI Components
+import Breadcrumb from '../components/Breadcrumb.astro';
+import AdBanner from '../components/AdBanner.astro';
+
+// AEO-Optimized FAQ Data (Will be passed to Layout for JSON-LD Schema)
+const faqData = [
+  {
+    question: "هل تجب الزكاة في ذهب الزينة الملبوس؟",
+    answer: "اختلف العلماء في زكاة حُلي المرأة المعد للاستعمال والزينة. والأحوط إخراج زكاته إذا بلغ النصاب وحال عليه الحول، خروجاً من الخلاف وعملاً بعموم الأدلة الشرعية."
+  },
+  {
+    question: "هل تُحسب قيمة الفصوص والأحجار الكريمة ضمن زكاة الذهب؟",
+    answer: "لا، الزكاة تجب في وزن الذهب الصافي فقط. الفصوص والألماس والأحجار الكريمة المركبة في الذهب ليس عليها زكاة ما لم تكن عروض تجارة (مُعدة للبيع والتجارة)."
+  },
+  {
+    question: "كيف يتم حساب النصاب للأعيرة المختلفة (21 و 18)؟",
+    answer: "يتم ضرب وزن العيار في نسبة نقائه (مثلاً: عيار 21 × 0.875 وعيار 18 × 0.750) لتحويل الوزن الإجمالي إلى مكافئ عيار 24 النقي، ثم مقارنة المجموع بنصاب 85 جراماً."
+  }
+];
 ---
 
 <Layout 
   title="حاسبة زكاة الذهب المباشرة | نصاب الزكاة اليوم في السعودية"
   description="احسب زكاة ذهبك بدقة وفقاً للأسعار اللحظية للذهب في السعودية. حاسبة زكاة الذهب لعيار 21 و 24 و 18 مع شرح النصاب الشرعي وطريقة الحساب."
+  faq={faqData}
 >
-  <nav class="max-w-7xl mx-auto px-4 py-4 text-xs md:text-sm text-gray-500" aria-label="Breadcrumb">
-    <ol class="flex items-center space-x-2 space-x-reverse">
-      <li><a href="/" class="hover:text-amber-600 font-medium transition">الرئيسية</a></li>
-      <li><span class="mx-1">/</span></li>
-      <li class="text-amber-700 font-semibold" aria-current="page">حاسبة زكاة الذهب</li>
-    </ol>
-  </nav>
+  <Breadcrumb currentPage="حاسبة زكاة الذهب" />
 
   <div class="max-w-7xl mx-auto px-4 pb-16">
     <header class="border-b border-gray-200 pb-6 mb-8 text-right">
       
-      <!-- Modern Pill Badge for Live Status -->
+      <!-- Custom Live Badge specifically for Zakat Calculator -->
       <div class="inline-flex flex-wrap items-center gap-2 px-3 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs md:text-sm font-semibold mb-4 shadow-sm">
         <span class="relative flex h-2.5 w-2.5">
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
           <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500"></span>
         </span>
-        <span>مرتبطة بالسعر المباشر للذهب عيار 24:</span>
+        <span>السعر اللحظي لعيار 24 المستخدم في الحساب:</span>
         <span id="live-24k-badge" class="bg-white px-2 py-0.5 rounded text-amber-900 shadow-sm border border-amber-100 whitespace-nowrap" dir="ltr">جاري التحديث...</span>
       </div>
 
@@ -38,8 +47,14 @@ const lastUpdated = new Date().toLocaleTimeString('ar-SA', {
       </h1>
       
       <!-- Ali Abdaal Style Highlights -->
-      <p class="text-gray-600 text-sm md:text-base max-w-4xl leading-relaxed">
-        أدخل أوزان الذهب التي تملكها في الحقول أدناه. ستقوم الحاسبة تلقائياً بتحويل جميع الأعيرة إلى <span class="bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded font-medium">مكافئ عيار 24</span>، ومقارنتها مع النصاب الشرعي (<span class="bg-emerald-100 text-emerald-900 px-1.5 py-0.5 rounded font-medium">85 جراماً</span>)، وحساب قيمة الزكاة الواجبة بالريال السعودي وفقاً للأسعار اللحظية للشاشة العالمية.
+      <p class="text-gray-600 text-sm md:text-base max-w-4xl leading-relaxed mb-3">
+        أدخل أوزان الذهب التي تملكها في الحقول أدناه. ستقوم الحاسبة تلقائياً بتحويل جميع الأعيرة إلى <span class="bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded font-medium">مكافئ عيار 24</span>، ومقارنتها مع النصاب الشرعي (<span class="bg-emerald-100 text-emerald-900 px-1.5 py-0.5 rounded font-medium">85 جراماً</span>)، وحساب قيمة الزكاة الواجبة بالريال السعودي وفقاً للأسعار اللحظية.
+      </p>
+
+      <!-- Source Citation (E-E-A-T) -->
+      <p class="text-xs text-gray-500 flex items-center gap-1">
+        <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <span>تعتمد هذه الحاسبة على الأسعار اللحظية (Spot Price) المتصلة برمجياً بالأسواق العالمية لضمان أقصى درجات الدقة.</span>
       </p>
     </header>
 
@@ -127,9 +142,13 @@ const lastUpdated = new Date().toLocaleTimeString('ar-SA', {
           </div>
         </section>
 
-        <!-- AdSense Content Banner -->
-        <div class="w-full min-h-[120px] bg-gray-50 flex items-center justify-center border border-gray-200 rounded-lg text-gray-500 text-xs text-center" aria-hidden="true">
-          [مساحة إعلانية]
+        <AdBanner />
+
+        <!-- Image Placeholder for SEO -->
+        <div class="w-full h-48 md:h-64 bg-gray-100 rounded-lg mb-4 border border-gray-200 flex items-center justify-center text-gray-400 text-sm overflow-hidden relative">
+           <!-- المستقبلي: أضف صورة حقيقية هنا تتعلق بزكاة المال أو ميزان ذهب -->
+           <img src="/images/saudi-zakat-gold.jpg" alt="حساب زكاة الذهب والنصاب الشرعي" class="w-full h-full object-cover absolute inset-0 opacity-0 transition-opacity duration-300" onload="this.classList.remove('opacity-0')" onerror="this.style.display='none'" />
+           <span class="z-10">[مساحة لصورة توضيحية لزكاة المال أو الميزان]</span>
         </div>
 
         <!-- AEO Thick Content: Rules of Zakat -->
@@ -142,7 +161,7 @@ const lastUpdated = new Date().toLocaleTimeString('ar-SA', {
                 <span>1️⃣</span> بلوغ النصاب
               </h3>
               <p class="text-sm text-gray-600 leading-relaxed">
-                لا تجب الزكاة في الذهب حتى يبلغ النصاب، وهو <span class="bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded font-bold">85 جراماً من الذهب الخالص (عيار 24)</span>. إذا كان الذهب من عيارات أخرى (مثل 21 أو 18)، يجب حساب وزنه الصافي من الذهب الخالص أولاً. وتقوم هذه الحاسبة بهذه العملية الحسابية تلقائياً نيابة عنك.
+                لا تجب الزكاة في الذهب حتى يبلغ النصاب، وهو <span class="bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded font-bold">85 جراماً من الذهب الخالص (عيار 24)</span>. إذا كان الذهب من عيارات أخرى (مثل 21 أو 18)، يجب حساب وزنه الصافي من الذهب الخالص أولاً. وتقوم هذه الحاسبة بهذه العملية الحسابية تلقائياً نيابة عنك لحمايتك من الأخطاء الفقهية.
               </p>
             </div>
             
@@ -153,7 +172,7 @@ const lastUpdated = new Date().toLocaleTimeString('ar-SA', {
                 <span>2️⃣</span> حولان الحول
               </h3>
               <p class="text-sm text-gray-600 leading-relaxed">
-                يُشترط لوجوب الزكاة أن يمر على امتلاك الذهب البالغ للنصاب <span class="bg-emerald-100 text-emerald-900 px-1.5 py-0.5 rounded font-medium">سنة هجرية كاملة (حول كامل)</span>. إذا نقص الذهب عن النصاب أثناء الحول، انقطع الحول، ويبدأ حساب حول جديد من يوم بلوغه النصاب مرة أخرى.
+                يُشترط لوجوب الزكاة أن يمر على امتلاك الذهب البالغ للنصاب <span class="bg-emerald-100 text-emerald-900 px-1.5 py-0.5 rounded font-medium">سنة هجرية كاملة (حول كامل)</span>. إذا نقص الذهب عن النصاب أثناء الحول بسبب البيع أو الحاجة، انقطع الحول، ويبدأ حساب حول جديد من يوم بلوغه النصاب مرة أخرى.
               </p>
             </div>
 
@@ -170,45 +189,23 @@ const lastUpdated = new Date().toLocaleTimeString('ar-SA', {
           </div>
         </section>
 
-        <!-- FAQ Section for Zakat -->
+        <!-- FAQ Section for Zakat (Rendered from array) -->
         <section class="mb-8">
           <h2 class="text-xl font-bold text-gray-900 mb-4 border-r-4 border-amber-500 pr-3">أسئلة شائعة حول زكاة الذهب</h2>
           <div class="space-y-4">
-            <details class="group bg-white border border-gray-200 rounded-lg shadow-sm open:shadow-md transition-all">
-              <summary class="flex justify-between items-center font-semibold cursor-pointer list-none p-4 text-gray-900">
-                <span>هل تجب الزكاة في ذهب الزينة الملبوس؟</span>
-                <span class="transition group-open:rotate-180 text-amber-500">
-                  <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><polyline points="6 9 12 15 18 9"/></svg>
-                </span>
-              </summary>
-              <p class="text-sm text-gray-600 leading-relaxed px-4 pb-4 mt-2 border-t border-gray-100 pt-3">
-                اختلف العلماء في زكاة حُلي المرأة المُعد للاستعمال والزينة. فذهب بعض أهل العلم إلى عدم وجوب الزكاة فيه إذا كان للاستعمال الشخصي المعتاد. وذهب آخرون (وهو الأحوط والأبرأ للذمة) إلى وجوب الزكاة فيه إذا بلغ النصاب وحال عليه الحول، وذلك لعموم الأدلة الشرعية الموجبة لزكاة الذهب.
-              </p>
-            </details>
-
-            <details class="group bg-white border border-gray-200 rounded-lg shadow-sm open:shadow-md transition-all">
-              <summary class="flex justify-between items-center font-semibold cursor-pointer list-none p-4 text-gray-900">
-                <span>هل تُحسب قيمة الفصوص والأحجار الكريمة ضمن زكاة الذهب؟</span>
-                <span class="transition group-open:rotate-180 text-amber-500">
-                  <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><polyline points="6 9 12 15 18 9"/></svg>
-                </span>
-              </summary>
-              <p class="text-sm text-gray-600 leading-relaxed px-4 pb-4 mt-2 border-t border-gray-100 pt-3">
-                لا، الزكاة تجب في وزن الذهب الصافي فقط. الفصوص والألماس والأحجار الكريمة المركبة في الذهب ليس عليها زكاة ما لم تكن عروض تجارة (مُعدة للبيع والتجارة).
-              </p>
-            </details>
-
-            <details class="group bg-white border border-gray-200 rounded-lg shadow-sm open:shadow-md transition-all">
-              <summary class="flex justify-between items-center font-semibold cursor-pointer list-none p-4 text-gray-900">
-                <span>كيف يتم حساب النصاب للأعيرة المختلفة (21 و 18)؟</span>
-                <span class="transition group-open:rotate-180 text-amber-500">
-                  <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><polyline points="6 9 12 15 18 9"/></svg>
-                </span>
-              </summary>
-              <p class="text-sm text-gray-600 leading-relaxed px-4 pb-4 mt-2 border-t border-gray-100 pt-3">
-                يتم ضرب وزن العيار في نسبة نقائه. مثلاً: الذهب عيار 21 يضرب وزنه في (0.875)، وعيار 18 يضرب وزنه في (0.750)، ليتم تحويل الوزن الإجمالي إلى مكافئ عيار 24 النقي، وبناءً عليه يُحدد ما إذا كان المجموع يبلغ 85 جراماً أم لا.
-              </p>
-            </details>
+            {faqData.map((faq) => (
+              <details class="group bg-white border border-gray-200 rounded-lg shadow-sm open:shadow-md transition-all">
+                <summary class="flex justify-between items-center font-semibold cursor-pointer list-none p-4 text-gray-900">
+                  <span>{faq.question}</span>
+                  <span class="transition group-open:rotate-180 text-amber-500">
+                    <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><polyline points="6 9 12 15 18 9"/></svg>
+                  </span>
+                </summary>
+                <p class="text-sm text-gray-600 leading-relaxed px-4 pb-4 mt-2 border-t border-gray-100 pt-3">
+                  {faq.answer}
+                </p>
+              </details>
+            ))}
           </div>
         </section>
 
@@ -226,12 +223,7 @@ const lastUpdated = new Date().toLocaleTimeString('ar-SA', {
              </a>
           </div>
 
-          <!-- Vertical AdSense Placeholder -->
-          <div class="w-full h-[600px] bg-gray-50 border border-gray-200 flex flex-col items-center justify-center rounded-xl text-gray-500 text-sm">
-             <span class="mb-2 text-2xl">🪙</span>
-             <span>[مساحة إعلانية عمودية]</span>
-             <span class="text-xs mt-1 text-gray-400">SkyScraper Ad (300x600)</span>
-          </div>
+          <AdBanner variant="vertical" />
 
         </div>
       </aside>
@@ -273,7 +265,7 @@ const lastUpdated = new Date().toLocaleTimeString('ar-SA', {
       }
     }
 
-    // Calculation Logic
+    // Mathematical Calculation Logic
     function calculateZakat() {
       if (currentRate24K === 0) return; // Wait for API
 
@@ -282,7 +274,7 @@ const lastUpdated = new Date().toLocaleTimeString('ar-SA', {
       const w21 = parseFloat(input21.value) || 0;
       const w18 = parseFloat(input18.value) || 0;
 
-      // Convert all to 24K equivalent weight
+      // Convert all to 24K equivalent weight mathematically
       const totalEquivalent24K = (w24 * 1) + (w22 * 0.916) + (w21 * 0.875) + (w18 * 0.750);
       
       // Calculate Total Market Value in SAR
@@ -303,7 +295,7 @@ const lastUpdated = new Date().toLocaleTimeString('ar-SA', {
 
       // Check Nisab
       if (totalEquivalent24K >= NISAB_GRAMS) {
-        const zakatAmount = totalMarketValue * 0.025; // 2.5%
+        const zakatAmount = totalMarketValue * 0.025; // 2.5% computation
         
         nisabStatusEl.textContent = `✅ لقد بلغ الذهب النصاب (${totalEquivalent24K.toFixed(2)} جرام عيار 24)`;
         nisabStatusEl.className = "text-xl font-bold text-emerald-700 mb-4";

@@ -1,0 +1,17 @@
+---
+// src/components/AdBanner.astro
+export interface Props {
+  variant?: 'horizontal' | 'vertical';
+  className?: string;
+}
+
+const { variant = 'horizontal', className = '' } = Astro.props;
+
+// Vertical (Sidebar) ke liye height 600px, Horizontal (Content) ke liye 90px
+const baseClass = variant === 'vertical' ? 'min-h-[600px] w-full' : 'min-h-[90px] w-full';
+---
+
+<div class={`${baseClass} bg-transparent ${className}`} aria-hidden="true">
+  <!-- مستقبلاً: سيتم وضع كود إعلانات جوجل أدسنس هنا -->
+  <!-- Future: Google AdSense Code goes here -->
+</div>

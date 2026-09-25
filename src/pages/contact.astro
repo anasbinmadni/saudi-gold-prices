@@ -3,34 +3,84 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout 
-  title="اتصل بنا | أسعار الذهب السعودية"
-  description="تواصل مع إدارة موقع أسعار الذهب السعودية لأي استفسارات حول أسعار الذهب أو للإعلان على الموقع."
+  title="تواصل معنا - منصة أسعار الذهب السعودية | الدعم الفني"
+  description="تواصل مع فريق الدعم الفني لمنصة أسعار الذهب المباشر في السعودية. نرحب باستفساراتكم، ومقترحاتكم، وطلبات الإعلان على المنصة."
 >
-  <main class="max-w-4xl mx-auto px-4 py-16">
-    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 md:p-12 text-center">
-      <span class="text-5xl mb-4 block">✉️</span>
-      <h1 class="text-3xl font-extrabold text-gray-900 mb-4">اتصل بنا</h1>
-      <p class="text-gray-600 mb-8 max-w-lg mx-auto leading-relaxed">
-        نرحب بجميع استفساراتكم، اقتراحاتكم، أو طلبات الإعلان على موقعنا. نسعى للرد على جميع الرسائل في أقرب وقت ممكن.
-      </p>
+  <nav class="max-w-7xl mx-auto px-4 py-4 text-xs md:text-sm text-gray-500" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 space-x-reverse">
+      <li><a href="/" class="hover:text-amber-600 font-medium transition">الرئيسية</a></li>
+      <li><span class="mx-1">/</span></li>
+      <li class="text-amber-700 font-semibold" aria-current="page">تواصل معنا</li>
+    </ol>
+  </nav>
 
-      <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 inline-block text-right w-full max-w-md">
-        <h2 class="font-bold text-gray-900 mb-4">بيانات التواصل:</h2>
-        <div class="space-y-3">
-          <p class="text-sm text-gray-700">
-            <strong>البريد الإلكتروني:</strong> <br />
-            <a href="mailto:info@saudigoldprices.com" class="text-amber-600 hover:underline" dir="ltr">info@saudigoldprices.com</a>
-          </p>
-          <p class="text-sm text-gray-700">
-            <strong>أوقات العمل:</strong> <br />
-            الأحد - الخميس (9:00 صباحاً - 5:00 مساءً)
-          </p>
-        </div>
+  <div class="max-w-4xl mx-auto px-4 pb-16">
+    <header class="border-b border-gray-200 pb-8 mb-10 text-center">
+      <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 mb-6">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+        </svg>
       </div>
-      
-      <p class="text-xs text-gray-500 mt-8">
-        ملاحظة: نحن منصة لعرض الأسعار فقط ولا نبيع أو نشتري الذهب، ولا نمتلك أي محلات تجارية.
+      <h1 class="text-3xl md:text-5xl font-extrabold text-gray-900 tracking-tight mb-4">
+        يسعدنا تواصلك معنا
+      </h1>
+      <p class="text-gray-600 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+        سواء كان لديك استفسار تقني، أو اقتراح لتطوير المنصة، أو رغبة في <span class="bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded font-medium">الإعلان التجاري</span>، فريق <strong class="text-gray-800">Abraaj Growth Labs</strong> جاهز للرد عليك.
       </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+      
+      <!-- WhatsApp Support Card -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 text-center hover:shadow-md transition-shadow">
+        <div class="w-12 h-12 mx-auto bg-green-50 rounded-full flex items-center justify-center mb-4">
+          <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+        </div>
+        <h2 class="text-xl font-bold text-gray-900 mb-2">الدعم الفني والتقني</h2>
+        <p class="text-sm text-gray-600 mb-6 leading-relaxed">
+          تواصل مع فريق التطوير مباشرة عبر الواتساب للاستفسارات التقنية وعروض الشراكة.
+        </p>
+        <!-- Replace YOUR_PHONE_NUMBER with your actual PK number in international format, e.g., 923001234567 -->
+        <a href="https://wa.me/923394478384" target="_blank" rel="noopener noreferrer" class="inline-block w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg transition shadow-sm text-center" dir="ltr">
+          +92 339 447 8384
+        </a>
+      </div>
+
+      <!-- Email Support Card -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 text-center hover:shadow-md transition-shadow">
+        <div class="w-12 h-12 mx-auto bg-amber-50 rounded-full flex items-center justify-center mb-4">
+          <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
+          </svg>
+        </div>
+        <h2 class="text-xl font-bold text-gray-900 mb-2">البريد الإلكتروني</h2>
+        <p class="text-sm text-gray-600 mb-6 leading-relaxed">
+          للرسائل الرسمية، والإبلاغ عن الأخطاء، أو طلبات الإعلانات التجارية على مساحات الموقع.
+        </p>
+        <!-- Replace with your actual email -->
+        <a href="mailto:info@saudigoldrates.com" class="inline-block w-full bg-gray-900 hover:bg-gray-800 text-white font-bold py-3 px-4 rounded-lg transition shadow-sm text-center" dir="ltr">
+          info@saudigoldrates.com
+        </a>
+      </div>
+
     </div>
-  </main>
+
+    <!-- Important Disclaimer for Contact -->
+    <div class="bg-amber-50 rounded-xl border border-amber-200 p-6 flex gap-4 items-start">
+      <div class="text-amber-500 mt-1">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+      </div>
+      <div>
+        <h3 class="font-bold text-amber-900 mb-1">تنبيه هام للمستخدمين</h3>
+        <p class="text-sm text-amber-800 leading-relaxed">
+          منصة <strong class="font-bold">أسعار الذهب السعودية</strong> هي أداة تقنية لعرض البيانات المالية فقط. نحن لا نمتلك أي محلات ذهب، ولا نقوم بعمليات بيع أو شراء للذهب أو السبائك. يُرجى عدم التواصل بغرض شراء الذهب أو حجز الطلبات.
+        </p>
+      </div>
+    </div>
+
+  </div>
 </Layout>
