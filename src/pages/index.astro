@@ -78,9 +78,9 @@ const faqData = [
             <span class="text-xl">📈</span>
             <h2 class="font-bold text-gray-800">الرسم البياني المباشر لتاريخ أسعار الذهب (أونصة/دولار)</h2>
           </div>
-          <div class="tradingview-widget-container" style="height: 400px; width: 100%;">
+          <div class="tradingview-widget-container w-full min-h-[400px] overflow-hidden">
             <div id="tradingview_gold" style="height: calc(100% - 32px); width: 100%;"></div>
-            <script type="text/javascript" src="https://s3.tradingview.com/tv.js" is:inline></script>
+            <script type="text/javascript" src="https://s3.tradingview.com/tv.js" is:inline defer></script>
             <script type="text/javascript" is:inline>
               new TradingView.widget({
                 "autosize": true,
